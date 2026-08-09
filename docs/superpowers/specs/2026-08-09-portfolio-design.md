@@ -10,7 +10,7 @@ editor, autenticación, Cloudinary, Docker). El objetivo es tener un portfolio
 propio de Francisco Vacs, con sus proyectos y su sección de recursos, hosteado
 en Vercel.
 
-Se decidió **no adaptar** ese template sino empezar un proyecto Next.js 15
+Se decidió **no adaptar** ese template sino empezar un proyecto Next.js 16
 limpio. La razón: cambian la versión del framework, el estilo visual, la
 estructura de rutas, el idioma y el modelo de contenido. Migrar arrastra
 decisiones ajenas y termina costando más que empezar de nuevo. Del template se
@@ -49,6 +49,12 @@ justificar la complejidad en un sitio de contenido estático.
 
 ## Transición desde el template descargado
 
+Nota de versiones: el diseño original mencionaba Next.js 15. Al momento de
+implementar, la versión vigente es Next.js 16.3, que renombra `middleware.ts` a
+`proxy.ts`, vuelve asíncronos `params` y `searchParams`, usa Turbopack por
+defecto y elimina el comando `next lint` (coherente con haber elegido Biome).
+Se decidió arrancar directamente en 16.3 con Tailwind 4.
+
 El directorio de trabajo contiene hoy el template de terceros. El proyecto nuevo
 se scaffoldea en el mismo directorio y los archivos del template se eliminan por
 completo: `src/`, `prisma/`, `tests/`, `docker-compose.yml`, `.env.example`,
@@ -70,16 +76,23 @@ datos del autor original (que aparecían, por ejemplo, en la contraseña de
 
 | Área | Elección |
 |---|---|
-| Framework | Next.js 15 (App Router), React 19 |
-| Lenguaje | TypeScript |
-| Estilos | Tailwind CSS |
-| Componentes | shadcn/ui |
+| Framework | Next.js 16.3 (App Router, Turbopack), React 19.2 |
+| Lenguaje | TypeScript 5 |
+| Estilos | Tailwind CSS 4 (configuración dentro del CSS) |
+| Componentes | propios; tokens compatibles con shadcn/ui (ver nota) |
 | Internacionalización | next-intl |
 | Validación | Zod |
 | Lint y formato | Biome (reemplaza ESLint + Prettier) |
 | Tests unitarios | Vitest |
 | Tests end-to-end | Playwright |
 | Hosting | Vercel |
+
+Nota sobre shadcn/ui: se eligió durante el brainstorming, pero el diseño sobrio
+aprobado no usa ninguna primitiva compleja —toda la interfaz son links, listas y
+un botón—, así que instalarlo sería peso muerto. En su lugar, los tokens de
+color del sitio usan los nombres que shadcn/ui espera (`--background`,
+`--foreground`, `--muted-foreground`, `--border`), de modo que sumarlo el día
+que haga falta un diálogo o un menú desplegable no requiere rehacer la paleta.
 
 ## Arquitectura
 
@@ -98,7 +111,7 @@ src/
     home/                Hero, About, Timeline, FeaturedWork, Contact
     work/                WorkGrid, WorkCard, WorkFilters
     fav/                 FavGroup, FavCard
-    ui/                  componentes de shadcn/ui
+    ui/                  primitivas propias (Section, Container)
   content/
     profile.ts
     projects.ts
