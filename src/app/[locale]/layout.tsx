@@ -48,6 +48,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: habilita el revelado sólo si hay JS
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add("js")`,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <NextIntlClientProvider>
           <div className="flex min-h-screen flex-col">

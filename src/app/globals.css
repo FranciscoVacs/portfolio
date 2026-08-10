@@ -35,3 +35,27 @@ p {
   text-align: justify;
   text-wrap: pretty;
 }
+
+.js .reveal-content > :not(.reveal-content) {
+  filter: blur(8px);
+  opacity: 0;
+  transition:
+    filter 0.6s ease-out,
+    opacity 0.6s ease-out;
+}
+.js .reveal-content > .revealed {
+  filter: blur(0);
+  opacity: 1;
+}
+.js .reveal-content > .reveal-settled {
+  filter: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal-content > * {
+    filter: none;
+    opacity: 1;
+    transition: none;
+  }
+}
