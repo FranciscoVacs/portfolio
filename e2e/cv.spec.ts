@@ -2,9 +2,10 @@ import { expect, test } from "@playwright/test";
 
 test("CV ofrece la descarga del PDF", async ({ page }) => {
   await page.goto("/en/cv");
-  const download = page
-    .locator(".flex.flex-wrap")
-    .getByRole("link", { name: "Download PDF" });
+  const download = page.getByRole("link", {
+    name: "Download PDF",
+    exact: true,
+  });
   await expect(download).toHaveAttribute(
     "href",
     "/cv/francisco-vacs-cv-en.pdf",
@@ -19,8 +20,9 @@ test("el PDF del CV se sirve correctamente", async ({ request }) => {
 
 test("CV traduce al español", async ({ page }) => {
   await page.goto("/es/cv");
-  const download = page
-    .locator(".flex.flex-wrap")
-    .getByRole("link", { name: "Descargar PDF" });
+  const download = page.getByRole("link", {
+    name: "Descargar PDF",
+    exact: true,
+  });
   await expect(download).toBeVisible();
 });

@@ -36,6 +36,7 @@ export default function CvPage() {
             download
             className="text-foreground underline underline-offset-4"
           >
+            <span className="sr-only">{t("fallback")} </span>
             {t("download")}
           </a>
         </p>
