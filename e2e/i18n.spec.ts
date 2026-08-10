@@ -17,9 +17,12 @@ test("el locale español carga", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
 });
 
-test("un locale desconocido devuelve 404", async ({ page }) => {
+test("/de no sirve contenido y termina en 404", async ({ page }) => {
   const response = await page.goto("/de");
   expect(response?.status()).toBe(404);
+  await expect(
+    page.getByRole("heading", { name: "Page not found" }),
+  ).toBeVisible();
 });
 
 test("una ruta inexistente dentro de un locale valido devuelve 404", async ({

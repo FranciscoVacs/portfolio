@@ -8,6 +8,7 @@ export default defineConfig({
   reporter: "list",
   use: {
     baseURL: "http://localhost:3000",
+    colorScheme: "light",
     trace: "on-first-retry",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
