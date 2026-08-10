@@ -1,5 +1,6 @@
 "use client";
 
+import { DottedUnderline } from "@/components/ui/DottedLink";
 import { Link, usePathname } from "@/i18n/navigation";
 
 export function NavLink({ href, label }: { href: string; label: string }) {
@@ -16,7 +17,10 @@ export function NavLink({ href, label }: { href: string; label: string }) {
           : "group font-mono text-foreground text-xs uppercase tracking-wide transition-colors hover:text-brand"
       }
     >
-      {label}
+      <span className="relative inline-block">
+        {label}
+        <DottedUnderline onlyOnHover forceVisible={active} />
+      </span>
     </Link>
   );
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { DottedLink } from "@/components/ui/DottedLink";
 import { HoverCard } from "@/components/ui/HoverCard";
 import { TechBadge } from "@/components/ui/TechBadge";
 import type { Locale, Project } from "@/content/schema";
@@ -64,14 +65,9 @@ export function WorkCard({ project }: { project: Project }) {
           <ul className="mt-4 flex flex-wrap gap-4 text-sm">
             {links.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary underline underline-offset-4"
-                >
+                <DottedLink href={link.href} external>
                   {link.label}
-                </a>
+                </DottedLink>
               </li>
             ))}
           </ul>

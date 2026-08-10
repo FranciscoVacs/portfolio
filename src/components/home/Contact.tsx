@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { DottedLink } from "@/components/ui/DottedLink";
 import { Section } from "@/components/ui/Section";
 import { profile } from "@/content/profile";
 
@@ -19,15 +20,9 @@ export function Contact() {
       <ul className="flex flex-wrap gap-5 text-sm">
         {links.map((link) => (
           <li key={link.href}>
-            <a
-              href={link.href}
-              {...(link.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="text-primary underline underline-offset-4"
-            >
+            <DottedLink href={link.href} external={link.external}>
               {link.label}
-            </a>
+            </DottedLink>
           </li>
         ))}
       </ul>

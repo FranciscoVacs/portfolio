@@ -1,4 +1,5 @@
 import { useLocale, useTranslations } from "next-intl";
+import { DottedLink } from "@/components/ui/DottedLink";
 import type { FavCategory, FavItem, Locale } from "@/content/schema";
 
 export function FavGroup({
@@ -17,14 +18,9 @@ export function FavGroup({
       <ul className="flex flex-col gap-5">
         {items.map((item) => (
           <li key={item.url}>
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-4"
-            >
+            <DottedLink href={item.url} external>
               {item.name}
-            </a>
+            </DottedLink>
             <p className="mt-1 text-foreground text-sm leading-relaxed">
               {item.note[locale]}
             </p>

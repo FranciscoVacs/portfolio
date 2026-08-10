@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
+import { DottedUnderline } from "@/components/ui/DottedLink";
 import { profile } from "@/content/profile";
 import { alternatesFor } from "@/lib/site";
 
@@ -32,9 +33,12 @@ export default function CvPage() {
           <a
             href={profile.cv}
             download
-            className="text-primary text-sm underline underline-offset-4"
+            className="group text-primary text-sm transition-colors hover:text-brand"
           >
-            {t("download")}
+            <span className="relative inline-block">
+              {t("download")}
+              <DottedUnderline />
+            </span>
           </a>
         </div>
         <p className="mt-2 text-foreground">{t("subtitle")}</p>
@@ -51,10 +55,13 @@ export default function CvPage() {
           <a
             href={profile.cv}
             download
-            className="text-primary underline underline-offset-4"
+            className="group text-primary transition-colors hover:text-brand"
           >
             <span className="sr-only">{t("fallback")} </span>
-            {t("download")}
+            <span className="relative inline-block">
+              {t("download")}
+              <DottedUnderline />
+            </span>
           </a>
         </p>
       </object>
