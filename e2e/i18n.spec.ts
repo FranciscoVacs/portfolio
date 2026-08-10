@@ -1,0 +1,23 @@
+import { expect, test } from "@playwright/test";
+
+test("la raíz redirige a un locale", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/(en|es)$/);
+});
+
+test("el locale inglés carga", async ({ page }) => {
+  const response = await page.goto("/en");
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+});
+
+test("el locale español carga", async ({ page }) => {
+  const response = await page.goto("/es");
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+});
+
+test("un locale desconocido devuelve 404", async ({ page }) => {
+  const response = await page.goto("/de");
+  expect(response?.status()).toBe(404);
+});

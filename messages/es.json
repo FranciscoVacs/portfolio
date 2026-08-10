@@ -1,0 +1,54 @@
+{
+  "Nav": {
+    "home": "Inicio",
+    "work": "Trabajos",
+    "fav": "FAV",
+    "cv": "CV",
+    "toggleTheme": "Cambiar tema",
+    "switchLanguage": "Cambiar idioma"
+  },
+  "Home": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "education": "Educación",
+    "featuredWork": "Trabajos destacados",
+    "seeAllWork": "Ver todos los trabajos",
+    "contact": "Contacto",
+    "present": "Actualidad"
+  },
+  "Work": {
+    "title": "Trabajos",
+    "subtitle": "Todo lo que construí, de contratos a proyectos personales.",
+    "all": "Todos",
+    "personal": "Personales",
+    "contract": "Contratos",
+    "client": "Clientes",
+    "empty": "Todavía no hay proyectos en esta categoría.",
+    "liveDemo": "Ver en vivo",
+    "sourceCode": "Código fuente",
+    "store": "Tienda de apps"
+  },
+  "Fav": {
+    "title": "FAV",
+    "subtitle": "Páginas, canales y gente a los que vuelvo siempre.",
+    "youtube": "YouTube",
+    "blogs": "Blogs",
+    "tools": "Herramientas",
+    "learning": "Aprendizaje"
+  },
+  "Cv": {
+    "title": "CV",
+    "subtitle": "Mi currículum, en inglés.",
+    "download": "Descargar PDF",
+    "fallback": "Tu navegador no puede mostrar el PDF embebido."
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "Esa página no existe.",
+    "backHome": "Volver al inicio"
+  },
+  "Metadata": {
+    "title": "Francisco Vacs — Desarrollador full-stack",
+    "description": "Portfolio de Francisco Vacs, desarrollador full-stack de Rosario, Argentina."
+  }
+}

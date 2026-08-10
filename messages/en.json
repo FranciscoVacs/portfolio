@@ -1,0 +1,54 @@
+{
+  "Nav": {
+    "home": "Home",
+    "work": "Work",
+    "fav": "FAV",
+    "cv": "CV",
+    "toggleTheme": "Toggle theme",
+    "switchLanguage": "Switch language"
+  },
+  "Home": {
+    "about": "About",
+    "experience": "Experience",
+    "education": "Education",
+    "featuredWork": "Featured work",
+    "seeAllWork": "See all work",
+    "contact": "Get in touch",
+    "present": "Present"
+  },
+  "Work": {
+    "title": "Work",
+    "subtitle": "Everything I have built, from contract work to personal projects.",
+    "all": "All",
+    "personal": "Personal",
+    "contract": "Contract",
+    "client": "Client",
+    "empty": "No projects in this category yet.",
+    "liveDemo": "Live demo",
+    "sourceCode": "Source code",
+    "store": "App store"
+  },
+  "Fav": {
+    "title": "FAV",
+    "subtitle": "Pages, channels and people I keep coming back to.",
+    "youtube": "YouTube",
+    "blogs": "Blogs",
+    "tools": "Tools",
+    "learning": "Learning"
+  },
+  "Cv": {
+    "title": "CV",
+    "subtitle": "My resume, in English.",
+    "download": "Download PDF",
+    "fallback": "Your browser cannot display the PDF inline."
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "That page does not exist.",
+    "backHome": "Back to home"
+  },
+  "Metadata": {
+    "title": "Francisco Vacs — Full-stack developer",
+    "description": "Portfolio of Francisco Vacs, full-stack developer based in Rosario, Argentina."
+  }
+}
