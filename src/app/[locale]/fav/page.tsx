@@ -28,10 +28,10 @@ export default function FavPage() {
   return (
     <Container>
       <div className="pt-14">
-        <h1 className="font-semibold text-2xl text-foreground tracking-tight">
+        <h1 className="font-semibold text-2xl text-primary tracking-tight">
           {t("title")}
         </h1>
-        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
+        <p className="mt-2 text-foreground">{t("subtitle")}</p>
       </div>
       {groups.map((group) => (
         <FavGroup

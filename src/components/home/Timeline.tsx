@@ -17,15 +17,13 @@ export function Timeline() {
           {experience.map((item) => (
             <li key={`${item.company}-${item.period.start}`}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="font-medium text-foreground">{item.company}</h3>
-                <span className="text-muted-foreground text-sm">
+                <h3 className="font-medium text-primary">{item.company}</h3>
+                <span className="text-foreground text-sm">
                   {formatPeriod(item.period, present, locale)}
                 </span>
               </div>
-              <p className="text-muted-foreground text-sm">
-                {item.role[locale]}
-              </p>
-              <ul className="mt-2 flex list-disc flex-col gap-1 pl-5 text-muted-foreground text-sm">
+              <p className="text-foreground text-sm">{item.role[locale]}</p>
+              <ul className="mt-2 flex list-disc flex-col gap-1 pl-5 text-foreground text-sm">
                 {item.highlights[locale].map((highlight) => (
                   <li key={highlight}>{highlight}</li>
                 ))}
@@ -40,16 +38,12 @@ export function Timeline() {
           {education.map((item) => (
             <li key={`${item.institution}-${item.period.start}`}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="font-medium text-foreground">
-                  {item.institution}
-                </h3>
-                <span className="text-muted-foreground text-sm">
+                <h3 className="font-medium text-primary">{item.institution}</h3>
+                <span className="text-foreground text-sm">
                   {formatPeriod(item.period, present, locale)}
                 </span>
               </div>
-              <p className="text-muted-foreground text-sm">
-                {item.degree[locale]}
-              </p>
+              <p className="text-foreground text-sm">{item.degree[locale]}</p>
             </li>
           ))}
         </ul>

@@ -9,9 +9,7 @@ export function About() {
 
   return (
     <Section title={t("about")}>
-      <p className="text-muted-foreground leading-relaxed">
-        {profile.bio[locale]}
-      </p>
+      <p className="text-foreground leading-relaxed">{profile.bio[locale]}</p>
     </Section>
   );
 }

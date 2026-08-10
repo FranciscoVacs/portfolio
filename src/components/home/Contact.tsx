@@ -24,7 +24,7 @@ export function Contact() {
               {...(link.external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className="text-foreground underline underline-offset-4"
+              className="text-primary underline underline-offset-4"
             >
               {link.label}
             </a>

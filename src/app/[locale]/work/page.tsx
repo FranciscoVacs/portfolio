@@ -36,10 +36,10 @@ export default async function WorkPage({
   return (
     <Container>
       <div className="pt-14">
-        <h1 className="font-semibold text-2xl text-foreground tracking-tight">
+        <h1 className="font-semibold text-2xl text-primary tracking-tight">
           {t("title")}
         </h1>
-        <p className="mt-2 text-muted-foreground">{t("subtitle")}</p>
+        <p className="mt-2 text-foreground">{t("subtitle")}</p>
       </div>
       <WorkFilters active={filter} />
       <WorkGrid projects={visible} />

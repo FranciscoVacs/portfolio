@@ -36,17 +36,17 @@ export function WorkCard({ project }: { project: Project }) {
         ) : null}
 
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="font-medium text-foreground">{project.title}</h2>
-          <span className="text-muted-foreground text-sm">
+          <h2 className="font-medium text-primary">{project.title}</h2>
+          <span className="text-foreground text-sm">
             {formatPeriod(project.period, tHome("present"), locale)}
           </span>
         </div>
 
-        <p className="mt-2 text-muted-foreground leading-relaxed">
+        <p className="mt-2 text-foreground leading-relaxed">
           {project.summary[locale]}
         </p>
 
-        <ul className="mt-3 flex list-disc flex-col gap-1 pl-5 text-muted-foreground text-sm">
+        <ul className="mt-3 flex list-disc flex-col gap-1 pl-5 text-foreground text-sm">
           {project.highlights[locale].map((highlight) => (
             <li key={highlight}>{highlight}</li>
           ))}
@@ -68,7 +68,7 @@ export function WorkCard({ project }: { project: Project }) {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground underline underline-offset-4"
+                  className="text-primary underline underline-offset-4"
                 >
                   {link.label}
                 </a>

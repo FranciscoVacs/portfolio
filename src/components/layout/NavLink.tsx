@@ -12,8 +12,8 @@ export function NavLink({ href, label }: { href: string; label: string }) {
       aria-current={active ? "page" : undefined}
       className={
         active
-          ? "inline-block rounded-full bg-secondary px-3 py-1.5 text-foreground"
-          : "inline-block rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:bg-border hover:text-foreground"
+          ? "group font-mono text-primary text-xs uppercase tracking-wide transition-colors hover:text-brand"
+          : "group font-mono text-foreground text-xs uppercase tracking-wide transition-colors hover:text-brand"
       }
     >
       {label}

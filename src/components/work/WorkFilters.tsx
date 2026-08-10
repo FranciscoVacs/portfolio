@@ -22,8 +22,8 @@ export function WorkFilters({ active }: { active: WorkFilter }) {
           }
           className={
             filter === active
-              ? "font-medium text-foreground underline underline-offset-4"
-              : "text-muted-foreground transition-colors hover:text-foreground"
+              ? "font-medium text-primary underline underline-offset-4"
+              : "text-foreground transition-colors hover:text-primary"
           }
         >
           {t(filter)}

@@ -6,7 +6,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
   const t = useTranslations("Work");
 
   if (projects.length === 0) {
-    return <p className="mt-10 text-muted-foreground">{t("empty")}</p>;
+    return <p className="mt-10 text-foreground">{t("empty")}</p>;
   }
 
   return (

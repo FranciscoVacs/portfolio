@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Suspense } from "react";
+import { Link } from "@/i18n/navigation";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { NavLink } from "./NavLink";
 
@@ -14,24 +15,26 @@ export function Nav() {
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 bg-background/60 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <nav>
-          <ul className="flex items-center gap-1 rounded-full border border-border/60 bg-secondary/80 px-2 py-1.5 text-sm">
+    <header className="relative pt-0.5">
+      <div className="mx-auto max-w-2xl px-4">
+        <nav className="flex h-14 items-center justify-between">
+          <Link
+            href="/"
+            className="font-medium font-mono text-sm tracking-wide"
+          >
+            FV
+          </Link>
+          <div className="flex items-center gap-5">
             {links.map((link) => (
-              <li key={link.href}>
-                <NavLink href={link.href} label={link.label} />
-              </li>
+              <NavLink key={link.href} href={link.href} label={link.label} />
             ))}
-          </ul>
+            {/* LocaleSwitch lee searchParams: sin este Suspense el build
+                vuelve dinámicas todas las páginas estáticas. */}
+            <Suspense fallback={<div className="h-5 w-[3.25rem]" />}>
+              <LocaleSwitch />
+            </Suspense>
+          </div>
         </nav>
-        <div className="flex items-center gap-3">
-          {/* LocaleSwitch lee searchParams: sin este Suspense el build
-              vuelve dinámicas todas las páginas estáticas. */}
-          <Suspense fallback={<div className="h-5 w-[3.25rem]" />}>
-            <LocaleSwitch />
-          </Suspense>
-        </div>
       </div>
     </header>
   );

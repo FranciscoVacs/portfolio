@@ -27,8 +27,8 @@ export function LocaleSwitch() {
           locale={locale}
           className={
             locale === active
-              ? "font-medium text-foreground"
-              : "text-muted-foreground transition-colors hover:text-foreground"
+              ? "font-medium text-primary"
+              : "text-foreground transition-colors hover:text-primary"
           }
         >
           {locale.toUpperCase()}

@@ -17,12 +17,12 @@ export function FeaturedWork() {
         {featured.map((project) => (
           <li key={project.slug}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="font-medium text-foreground">{project.title}</h3>
-              <span className="text-muted-foreground text-sm">
+              <h3 className="font-medium text-primary">{project.title}</h3>
+              <span className="text-foreground text-sm">
                 {formatPeriod(project.period, t("present"), locale)}
               </span>
             </div>
-            <p className="mt-1 text-muted-foreground text-sm leading-relaxed">
+            <p className="mt-1 text-foreground text-sm leading-relaxed">
               {project.summary[locale]}
             </p>
           </li>
@@ -30,7 +30,7 @@ export function FeaturedWork() {
       </ul>
       <Link
         href="/work"
-        className="mt-6 inline-block text-foreground text-sm underline underline-offset-4"
+        className="mt-6 inline-block text-primary text-sm underline underline-offset-4"
       >
         {t("seeAllWork")}
       </Link>

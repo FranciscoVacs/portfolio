@@ -2,24 +2,36 @@
 
 @theme inline {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   --color-background: var(--background);
+  --color-primary: var(--primary);
   --color-foreground: var(--foreground);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-secondary: var(--secondary);
+  --color-brand: var(--brand);
+  --color-muted: var(--muted);
   --color-border: var(--border);
 }
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-  --secondary: hsl(240 4.8% 95.9%);
-  --border: hsl(240 5.9% 90%);
+  --background: #fff;
+  --primary: #111;
+  --foreground: #666;
+  --brand: #2d5ba4;
+  --muted: color-mix(in oklab, #111 6%, #fff);
+  --border: color-mix(in oklab, #111 12%, #fff);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--primary);
+  font-size: 14px;
+  line-height: 24px;
   -webkit-font-smoothing: antialiased;
+}
+
+p {
+  text-align: justify;
+  text-wrap: pretty;
 }

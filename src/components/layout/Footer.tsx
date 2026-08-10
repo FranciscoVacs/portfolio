@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="mt-20 border-border border-t py-8">
       <Container>
-        <div className="flex flex-wrap items-center justify-between gap-4 text-muted-foreground text-sm">
+        <div className="flex flex-wrap items-center justify-between gap-4 text-foreground text-sm">
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
@@ -14,7 +14,7 @@ export function Footer() {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground"
+              className="transition-colors hover:text-primary"
             >
               GitHub
             </a>
@@ -22,13 +22,13 @@ export function Footer() {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground"
+              className="transition-colors hover:text-primary"
             >
               LinkedIn
             </a>
             <a
               href={`mailto:${profile.email}`}
-              className="transition-colors hover:text-foreground"
+              className="transition-colors hover:text-primary"
             >
               Email
             </a>
