@@ -29,7 +29,7 @@ test("un filtro inválido cae en todos", async ({ page }) => {
 
 test("las tarjetas muestran el stack y los links", async ({ page }) => {
   await page.goto("/en/work");
-  await expect(page.getByText("React Native").first()).toBeVisible();
+  await expect(page.getByText("React Native", { exact: true })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Source code" }).first(),
   ).toBeVisible();
