@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { profile } from "@/content/profile";
+import { alternatesFor } from "@/lib/site";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Cv" });
+
+  return {
+    title: t("title"),
+    alternates: alternatesFor(locale, "/cv"),
+  };
+}
 
 export default function CvPage() {
   const t = useTranslations("Cv");

@@ -21,18 +21,35 @@ test("cada locale declara su alternativa", async ({ page }) => {
   await expect(page.locator('link[hreflang="en"]')).toHaveCount(1);
 });
 
-test("el sitemap lista las rutas de ambos locales", async ({ request }) => {
+test("el sitemap lista las ocho rutas de ambos locales", async ({
+  request,
+}) => {
   const response = await request.get("/sitemap.xml");
   expect(response.status()).toBe(200);
   const body = await response.text();
+  expect(body.match(/<loc>/g)).toHaveLength(8);
   for (const path of [
     "/en",
     "/es",
     "/en/work",
     "/es/work",
     "/en/fav",
+    "/es/fav",
     "/en/cv",
+    "/es/cv",
   ]) {
-    expect(body).toContain(path);
+    expect(body).toContain(`<loc>http://localhost:3000${path}</loc>`);
   }
+});
+
+test("cada pagina declara su propio canonical", async ({ page }) => {
+  await page.goto("/en/work");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    /\/en\/work$/,
+  );
+  await expect(page.locator('link[hreflang="es"]')).toHaveAttribute(
+    "href",
+    /\/es\/work$/,
+  );
 });
