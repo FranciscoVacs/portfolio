@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "./Container";
 import { LocaleSwitch } from "./LocaleSwitch";
-import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
   const t = useTranslations("Nav");
@@ -37,7 +36,6 @@ export function Nav() {
             <Suspense fallback={<div className="h-5 w-[3.25rem]" />}>
               <LocaleSwitch />
             </Suspense>
-            <ThemeToggle />
           </div>
         </nav>
       </Container>

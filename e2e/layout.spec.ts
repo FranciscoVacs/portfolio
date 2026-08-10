@@ -22,11 +22,3 @@ test("el selector de idioma conserva los parámetros de búsqueda", async ({
   await page.getByRole("link", { name: "ES", exact: true }).click();
   await expect(page).toHaveURL("/es/work?type=contract");
 });
-
-test("el toggle de tema cambia el tema y persiste", async ({ page }) => {
-  await page.goto("/en");
-  await page.getByRole("button", { name: "Toggle theme" }).click();
-  await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.reload();
-  await expect(page.locator("html")).toHaveClass(/dark/);
-});
