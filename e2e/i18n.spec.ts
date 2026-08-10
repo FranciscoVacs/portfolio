@@ -21,3 +21,10 @@ test("un locale desconocido devuelve 404", async ({ page }) => {
   const response = await page.goto("/de");
   expect(response?.status()).toBe(404);
 });
+
+test("una ruta inexistente dentro de un locale valido devuelve 404", async ({
+  page,
+}) => {
+  const response = await page.goto("/en/no-existe");
+  expect(response?.status()).toBe(404);
+});
