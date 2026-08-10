@@ -13,8 +13,8 @@ export function Hero() {
           src={profile.avatar}
           alt={profile.name}
           width={96}
-          height={96}
-          className="h-24 w-24 rounded-full object-cover"
+          height={110}
+          className="h-[110px] w-24 rounded-md border border-border object-cover"
           priority
         />
       ) : null}

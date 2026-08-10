@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { DottedLink } from "@/components/ui/DottedLink";
 import { HoverCard } from "@/components/ui/HoverCard";
 import { TechBadge } from "@/components/ui/TechBadge";
@@ -27,13 +28,17 @@ export function WorkCard({ project }: { project: Project }) {
     <HoverCard>
       <article>
         {project.image ? (
-          <Image
-            src={project.image.src}
-            alt={project.image.alt[locale]}
-            width={1200}
-            height={675}
-            className="mb-5 aspect-video w-full rounded-lg border border-border object-cover"
-          />
+          <div className="mb-5">
+            <BrowserFrame url={project.links.live}>
+              <Image
+                src={project.image.src}
+                alt={project.image.alt[locale]}
+                width={1200}
+                height={675}
+                className="aspect-video w-full object-cover"
+              />
+            </BrowserFrame>
+          </div>
         ) : null}
 
         <div className="flex flex-wrap items-baseline justify-between gap-2">

@@ -14,5 +14,6 @@ export const profile: Profile = profileSchema.parse({
   email: "franciscovacs@gmail.com",
   github: "https://github.com/FranciscoVacs",
   linkedin: "https://linkedin.com/in/francisco-vacs",
+  avatar: "/avatar.png",
   cv: "/cv/francisco-vacs-cv-en.pdf",
 });

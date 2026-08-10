@@ -26,7 +26,7 @@ export const projects: Project[] = parseAll(
         ],
       },
       stack: ["React Native", "Expo", "TypeScript", "Supabase", "PostgreSQL"],
-      links: {},
+      links: { live: "https://cunumi.app/welcome" },
     },
     {
       slug: "bohemia",
