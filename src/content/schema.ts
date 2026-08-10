@@ -101,9 +101,28 @@ export type ExperienceItem = z.infer<typeof experienceSchema>;
 export type EducationItem = z.infer<typeof educationSchema>;
 export type Profile = z.infer<typeof profileSchema>;
 
+/** Campos con los que una entrada de contenido se identifica a simple vista. */
+type ContentIdentity = {
+  slug?: unknown;
+  name?: unknown;
+  company?: unknown;
+  institution?: unknown;
+};
+
+function identify(item: unknown): string | undefined {
+  const candidate = item as ContentIdentity | null | undefined;
+  const id =
+    candidate?.slug ??
+    candidate?.name ??
+    candidate?.company ??
+    candidate?.institution;
+  return typeof id === "string" && id.length > 0 ? id : undefined;
+}
+
 /**
- * Valida un arreglo de contenido. Al fallar, el mensaje identifica el índice
- * exacto para que el error de build sea accionable.
+ * Valida un arreglo de contenido. Al fallar, el mensaje identifica el índice y
+ * el nombre legible de la entrada para que el error de build sea accionable
+ * incluso con decenas de registros.
  */
 export function parseAll<T>(
   schema: z.ZodType<T>,
@@ -113,10 +132,14 @@ export function parseAll<T>(
   return items.map((item, index) => {
     const result = schema.safeParse(item);
     if (!result.success) {
+      const id = identify(item);
       throw new Error(
-        `Contenido inválido en ${label}[${index}]: ${JSON.stringify(
+        `Contenido inválido en ${label}[${index}]${id ? ` (${id})` : ""}:\n${JSON.stringify(
           z.treeifyError(result.error),
+          null,
+          2,
         )}`,
+        { cause: result.error },
       );
     }
     return result.data;

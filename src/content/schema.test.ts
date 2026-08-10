@@ -69,4 +69,24 @@ describe("parseAll", () => {
       ),
     ).toThrow(/projects\[1\]/);
   });
+
+  it("incluye el identificador legible además del índice", () => {
+    expect(() =>
+      parseAll(
+        projectSchema,
+        [validProject, { ...validProject, slug: "bohemia", stack: [] }],
+        "projects",
+      ),
+    ).toThrow(/projects\[1\] \(bohemia\)/);
+  });
+
+  it("usa el name cuando el registro no tiene slug", () => {
+    expect(() =>
+      parseAll(
+        favItemSchema,
+        [{ name: "Fireship", url: "no-soy-una-url", category: "youtube" }],
+        "fav",
+      ),
+    ).toThrow(/fav\[0\] \(Fireship\)/);
+  });
 });
