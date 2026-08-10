@@ -18,22 +18,27 @@ export function LocaleSwitch() {
   return (
     <nav
       aria-label={t("switchLanguage")}
-      className="flex items-center gap-1 text-sm"
+      className="inline-flex items-center rounded-full border border-border bg-muted p-0.5"
     >
-      {routing.locales.map((locale) => (
-        <Link
-          key={locale}
-          href={{ pathname, query }}
-          locale={locale}
-          className={
-            locale === active
-              ? "font-medium text-primary"
-              : "text-foreground transition-colors hover:text-primary"
-          }
-        >
-          {locale.toUpperCase()}
-        </Link>
-      ))}
+      {routing.locales.map((locale) => {
+        const current = locale === active;
+        return (
+          <Link
+            key={locale}
+            href={{ pathname, query }}
+            locale={locale}
+            hrefLang={locale}
+            aria-current={current ? "true" : undefined}
+            className={`rounded-full px-2.5 py-1 font-medium text-xs transition-all duration-200 ${
+              current
+                ? "bg-background text-primary shadow-[0_1px_2px_rgb(0_0_0/0.08)]"
+                : "text-foreground hover:text-primary"
+            }`}
+          >
+            {locale.toUpperCase()}
+          </Link>
+        );
+      })}
     </nav>
   );
 }

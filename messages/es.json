@@ -13,7 +13,13 @@
     "featuredWork": "Trabajos destacados",
     "seeAllWork": "Ver todos los trabajos",
     "contact": "Contacto",
-    "present": "Actualidad"
+    "present": "Actualidad",
+    "skills": "Tecnologías",
+    "githubActivity": "Actividad en GitHub",
+    "contributions": "{count, plural, =0 {Sin contribuciones} one {# contribución} other {# contribuciones}} en el último año",
+    "contributionsOn": "{count, plural, =0 {Sin contribuciones} one {# contribución} other {# contribuciones}}",
+    "less": "Menos",
+    "more": "Más"
   },
   "Work": {
     "title": "Trabajos",

@@ -1,11 +1,13 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { TECH_ICONS } from "@/lib/tech-icons";
 import { education } from "./education";
 import { experience } from "./experience";
 import { favItems } from "./fav";
 import { profile } from "./profile";
 import { projects } from "./projects";
+import { skills } from "./skills";
 
 describe("contenido del sitio", () => {
   it("tiene un perfil cargado", () => {
@@ -55,6 +57,17 @@ describe("contenido del sitio", () => {
         height: project.image.height,
       });
     }
+  });
+
+  it("tiene un logo para cada tecnología del home", () => {
+    // Los badges grandes del home se ven incompletos sin ícono; para agregar
+    // una tecnología hay que regenerar scripts/gen-tech-icons.mjs primero.
+    const sinLogo = skills.filter((skill) => !TECH_ICONS[skill]);
+    expect(sinLogo).toEqual([]);
+  });
+
+  it("no repite tecnologías en el home", () => {
+    expect(new Set(skills).size).toBe(skills.length);
   });
 
   it("no repite URLs en FAV", () => {

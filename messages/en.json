@@ -13,7 +13,13 @@
     "featuredWork": "Featured work",
     "seeAllWork": "See all work",
     "contact": "Get in touch",
-    "present": "Present"
+    "present": "Present",
+    "skills": "Skills",
+    "githubActivity": "GitHub activity",
+    "contributions": "{count, plural, =0 {No contributions} one {# contribution} other {# contributions}} in the last year",
+    "contributionsOn": "{count, plural, =0 {No contributions} one {# contribution} other {# contributions}}",
+    "less": "Less",
+    "more": "More"
   },
   "Work": {
     "title": "Work",

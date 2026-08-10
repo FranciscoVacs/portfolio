@@ -4,7 +4,7 @@ export const experience: ExperienceItem[] = parseAll(
   experienceSchema,
   [
     {
-      company: "Cunumi",
+      company: "CUNUMI",
       role: {
         en: "Full Stack Developer — Freelance Contract",
         es: "Desarrollador Full Stack — Contrato freelance",

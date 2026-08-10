@@ -26,19 +26,6 @@ export function WorkCard({ project }: { project: Project }) {
   return (
     <HoverCard>
       <article>
-        {project.image ? (
-          <div className="mb-5 overflow-hidden rounded-lg border border-border">
-            <Image
-              src={project.image.src}
-              alt={project.image.alt[locale]}
-              width={project.image.width}
-              height={project.image.height}
-              sizes="(min-width: 42rem) 592px, 100vw"
-              className="h-auto w-full"
-            />
-          </div>
-        ) : null}
-
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h2 className="font-medium text-primary">{project.title}</h2>
           <span className="text-foreground text-sm">
@@ -46,20 +33,37 @@ export function WorkCard({ project }: { project: Project }) {
           </span>
         </div>
 
-        <p className="mt-2 text-foreground leading-relaxed">
-          {project.summary[locale]}
-        </p>
+        {/* La miniatura acompaña a la descripción en vez de encabezar la
+            tarjeta: en pantallas angostas vuelve a apilarse arriba. */}
+        <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start">
+          {project.image ? (
+            <Image
+              src={project.image.src}
+              alt={project.image.alt[locale]}
+              width={project.image.width}
+              height={project.image.height}
+              sizes="(min-width: 40rem) 200px, 100vw"
+              className="h-auto w-full rounded-md border border-border sm:w-[200px] sm:shrink-0"
+            />
+          ) : null}
 
-        <ul className="mt-3 flex list-disc flex-col gap-1 pl-5 text-foreground text-sm">
-          {project.highlights[locale].map((highlight) => (
-            <li key={highlight}>{highlight}</li>
-          ))}
-        </ul>
+          <div className="min-w-0 flex-1">
+            <p className="text-foreground leading-relaxed">
+              {project.summary[locale]}
+            </p>
+
+            <ul className="mt-3 flex list-disc flex-col gap-1 pl-5 text-foreground text-sm">
+              {project.highlights[locale].map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         <ul className="mt-4 flex flex-wrap gap-2">
           {project.stack.map((tech) => (
             <li key={tech}>
-              <TechBadge>{tech}</TechBadge>
+              <TechBadge name={tech} />
             </li>
           ))}
         </ul>

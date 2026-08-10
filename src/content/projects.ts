@@ -60,10 +60,7 @@ export const projects: Project[] = parseAll(
         ],
       },
       stack: ["Angular", "TypeScript", "Tailwind CSS", "Node.js", "REST API"],
-      links: {
-        live: "https://www.bohemia-socialclub.me",
-        repo: "https://github.com/FranciscoVacs/Bohemia_FrontEnd",
-      },
+      links: { live: "https://www.bohemia-socialclub.me" },
       image: {
         src: "/work/bohemia.png",
         alt: {
