@@ -6,6 +6,7 @@ import { FeaturedWork } from "@/components/home/FeaturedWork";
 import { Hero } from "@/components/home/Hero";
 import { Timeline } from "@/components/home/Timeline";
 import { Container } from "@/components/layout/Container";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { alternatesFor } from "@/lib/site";
 
 export async function generateMetadata({
@@ -25,11 +26,21 @@ export async function generateMetadata({
 export default function HomePage() {
   return (
     <Container>
-      <Hero />
-      <About />
-      <Timeline />
-      <FeaturedWork />
-      <Contact />
+      <FadeIn>
+        <Hero />
+      </FadeIn>
+      <FadeIn delay={0.05}>
+        <About />
+      </FadeIn>
+      <FadeIn delay={0.1}>
+        <Timeline />
+      </FadeIn>
+      <FadeIn delay={0.15}>
+        <FeaturedWork />
+      </FadeIn>
+      <FadeIn delay={0.2}>
+        <Contact />
+      </FadeIn>
     </Container>
   );
 }
