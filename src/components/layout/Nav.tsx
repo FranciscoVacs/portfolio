@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Suspense } from "react";
-import { Link } from "@/i18n/navigation";
 import { LocaleSwitch } from "./LocaleSwitch";
+import { NavLink } from "./NavLink";
 
 export function Nav() {
   const t = useTranslations("Nav");
@@ -20,12 +20,7 @@ export function Nav() {
           <ul className="flex items-center gap-1 rounded-full border border-border/60 bg-secondary/80 px-2 py-1.5 text-sm">
             {links.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="inline-block rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:bg-border hover:text-foreground"
-                >
-                  {link.label}
-                </Link>
+                <NavLink href={link.href} label={link.label} />
               </li>
             ))}
           </ul>

@@ -16,9 +16,7 @@ export function LocaleSwitch() {
   const query = Object.fromEntries(searchParams.entries());
 
   return (
-    // biome-ignore lint/a11y/useSemanticElements: son links, no controles de formulario; un <fieldset> fuera de un <form> confunde más al lector de pantalla
-    <div
-      role="group"
+    <nav
       aria-label={t("switchLanguage")}
       className="flex items-center gap-1 text-sm"
     >
@@ -36,6 +34,6 @@ export function LocaleSwitch() {
           {locale.toUpperCase()}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 }

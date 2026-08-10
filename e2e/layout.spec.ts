@@ -9,6 +9,19 @@ test("la navegación muestra los cuatro destinos", async ({ page }) => {
   await expect(nav.getByRole("link", { name: "CV" })).toBeVisible();
 });
 
+test("el link activo lleva aria-current", async ({ page }) => {
+  await page.goto("/en/work");
+  const nav = page.getByRole("navigation").first();
+  await expect(nav.getByRole("link", { name: "Work" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await expect(nav.getByRole("link", { name: "Home" })).not.toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+});
+
 test("el selector de idioma conserva la ruta", async ({ page }) => {
   await page.goto("/en/work");
   await page.getByRole("link", { name: "ES", exact: true }).click();
