@@ -1,0 +1,30 @@
+import Image from "next/image";
+import { useLocale } from "next-intl";
+import { profile } from "@/content/profile";
+import type { Locale } from "@/content/schema";
+
+export function Hero() {
+  const locale = useLocale() as Locale;
+
+  return (
+    <div className="flex flex-col gap-5 pt-14 sm:flex-row sm:items-center">
+      {profile.avatar ? (
+        <Image
+          src={profile.avatar}
+          alt={profile.name}
+          width={96}
+          height={96}
+          className="h-24 w-24 rounded-full object-cover"
+          priority
+        />
+      ) : null}
+      <div>
+        <h1 className="font-semibold text-2xl text-foreground tracking-tight">
+          {profile.name}
+        </h1>
+        <p className="mt-1 text-muted-foreground">{profile.headline[locale]}</p>
+        <p className="mt-1 text-muted-foreground text-sm">{profile.location}</p>
+      </div>
+    </div>
+  );
+}
