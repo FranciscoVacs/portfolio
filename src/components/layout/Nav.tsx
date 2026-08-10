@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 import { Link } from "@/i18n/navigation";
-import { Container } from "./Container";
 import { LocaleSwitch } from "./LocaleSwitch";
 
 export function Nav() {
@@ -15,30 +14,30 @@ export function Nav() {
   ] as const;
 
   return (
-    <header className="border-border border-b">
-      <Container>
-        <nav className="flex items-center justify-between gap-4 py-4">
-          <ul className="flex items-center gap-5 text-sm">
+    <header className="sticky top-0 z-50 bg-background/60 backdrop-blur-md">
+      <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <nav>
+          <ul className="flex items-center gap-1 rounded-full border border-border/60 bg-secondary/80 px-2 py-1.5 text-sm">
             {links.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-block rounded-full px-3 py-1.5 text-muted-foreground transition-colors hover:bg-border hover:text-foreground"
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="flex items-center gap-3">
-            {/* LocaleSwitch lee searchParams: sin este Suspense el build
-                vuelve dinámicas todas las páginas estáticas. */}
-            <Suspense fallback={<div className="h-5 w-[3.25rem]" />}>
-              <LocaleSwitch />
-            </Suspense>
-          </div>
         </nav>
-      </Container>
+        <div className="flex items-center gap-3">
+          {/* LocaleSwitch lee searchParams: sin este Suspense el build
+              vuelve dinámicas todas las páginas estáticas. */}
+          <Suspense fallback={<div className="h-5 w-[3.25rem]" />}>
+            <LocaleSwitch />
+          </Suspense>
+        </div>
+      </div>
     </header>
   );
 }

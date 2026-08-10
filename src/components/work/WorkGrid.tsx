@@ -10,7 +10,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
   }
 
   return (
-    <div className="mt-10 flex flex-col gap-12">
+    <div className="mt-10 flex flex-col gap-6">
       {projects.map((project) => (
         <WorkCard key={project.slug} project={project} />
       ))}
