@@ -10,20 +10,20 @@ next-themes, Zod, Biome, Vitest y Playwright. Desplegado en Vercel.
 ## Desarrollo
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Comandos
 
 | Comando | Qué hace |
 |---|---|
-| `npm run dev` | Servidor de desarrollo en http://localhost:3000 |
-| `npm run build` | Build de producción |
-| `npm run lint` | Linting con Biome |
-| `npm run typecheck` | Chequeo de tipos |
-| `npm test` | Tests unitarios (Vitest) |
-| `npm run test:e2e` | Tests end-to-end (Playwright) |
+| `pnpm dev` | Servidor de desarrollo en http://localhost:3000 |
+| `pnpm build` | Build de producción |
+| `pnpm lint` | Linting con Biome |
+| `pnpm typecheck` | Chequeo de tipos |
+| `pnpm test` | Tests unitarios (Vitest) |
+| `pnpm test:e2e` | Tests end-to-end (Playwright) |
 
 ## Cómo actualizar el contenido
 
