@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Suspense } from "react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "./Container";
 import { LocaleSwitch } from "./LocaleSwitch";
@@ -31,7 +32,11 @@ export function Nav() {
             ))}
           </ul>
           <div className="flex items-center gap-3">
-            <LocaleSwitch />
+            {/* LocaleSwitch lee searchParams: sin este Suspense el build
+                vuelve dinámicas todas las páginas estáticas. */}
+            <Suspense fallback={<div className="h-5 w-[3.25rem]" />}>
+              <LocaleSwitch />
+            </Suspense>
             <ThemeToggle />
           </div>
         </nav>

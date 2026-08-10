@@ -19,6 +19,7 @@
   "Work": {
     "title": "Work",
     "subtitle": "Everything I have built, from contract work to personal projects.",
+    "filterLabel": "Filter by category",
     "all": "All",
     "personal": "Personal",
     "contract": "Contract",

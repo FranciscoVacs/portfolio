@@ -8,7 +8,10 @@ export function WorkFilters({ active }: { active: WorkFilter }) {
   const t = useTranslations("Work");
 
   return (
-    <nav aria-label={t("title")} className="mt-8 flex flex-wrap gap-4 text-sm">
+    <nav
+      aria-label={t("filterLabel")}
+      className="mt-8 flex flex-wrap gap-4 text-sm"
+    >
       {FILTERS.map((filter) => (
         <Link
           key={filter}

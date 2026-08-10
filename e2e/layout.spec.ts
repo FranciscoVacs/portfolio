@@ -11,8 +11,16 @@ test("la navegación muestra los cuatro destinos", async ({ page }) => {
 
 test("el selector de idioma conserva la ruta", async ({ page }) => {
   await page.goto("/en/work");
-  await page.getByRole("link", { name: "ES" }).click();
+  await page.getByRole("link", { name: "ES", exact: true }).click();
   await expect(page).toHaveURL("/es/work");
+});
+
+test("el selector de idioma conserva los parámetros de búsqueda", async ({
+  page,
+}) => {
+  await page.goto("/en/work?type=contract");
+  await page.getByRole("link", { name: "ES", exact: true }).click();
+  await expect(page).toHaveURL("/es/work?type=contract");
 });
 
 test("el toggle de tema cambia el tema y persiste", async ({ page }) => {

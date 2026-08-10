@@ -19,6 +19,7 @@
   "Work": {
     "title": "Trabajos",
     "subtitle": "Todo lo que construí, de contratos a proyectos personales.",
+    "filterLabel": "Filtrar por categoría",
     "all": "Todos",
     "personal": "Personales",
     "contract": "Contratos",
