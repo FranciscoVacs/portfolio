@@ -27,6 +27,15 @@ export const projects: Project[] = parseAll(
       },
       stack: ["React Native", "Expo", "TypeScript", "Supabase", "PostgreSQL"],
       links: { live: "https://cunumi.app/welcome" },
+      image: {
+        src: "/work/cunumi.png",
+        alt: {
+          en: "Three phone screens from CUNUMI: community browser, allied businesses map and a pet profile.",
+          es: "Tres pantallas de CUNUMI: explorador de comunidades, mapa de negocios aliados y el perfil de una mascota.",
+        },
+        width: 1920,
+        height: 1440,
+      },
     },
     {
       slug: "bohemia",
@@ -51,7 +60,19 @@ export const projects: Project[] = parseAll(
         ],
       },
       stack: ["Angular", "TypeScript", "Tailwind CSS", "Node.js", "REST API"],
-      links: { repo: "https://github.com/FranciscoVacs/Bohemia_FrontEnd" },
+      links: {
+        live: "https://www.bohemia-socialclub.me",
+        repo: "https://github.com/FranciscoVacs/Bohemia_FrontEnd",
+      },
+      image: {
+        src: "/work/bohemia.png",
+        alt: {
+          en: "Bohemia home page showing the next event with its date, venue, lineup and ticket purchase button.",
+          es: "Portada de Bohemia con el próximo evento: fecha, dirección, lineup y el botón de compra de entradas.",
+        },
+        width: 2068,
+        height: 1077,
+      },
     },
   ],
   "projects",

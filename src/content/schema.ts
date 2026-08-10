@@ -56,6 +56,10 @@ export const projectSchema = z.object({
     .object({
       src: z.string().startsWith("/"),
       alt: localizedString,
+      /** Dimensiones reales del archivo: fijan la relación de aspecto y
+       * evitan que la tarjeta salte mientras la imagen carga. */
+      width: z.int().positive(),
+      height: z.int().positive(),
     })
     .optional(),
 });
