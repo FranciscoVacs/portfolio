@@ -3,7 +3,9 @@ import { getTranslations } from "next-intl/server";
 import { About } from "@/components/home/About";
 import { Contact } from "@/components/home/Contact";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
+import { GithubActivity } from "@/components/home/GithubActivity";
 import { Hero } from "@/components/home/Hero";
+import { Skills } from "@/components/home/Skills";
 import { Timeline } from "@/components/home/Timeline";
 import { Container } from "@/components/layout/Container";
 import { RevealContent } from "@/components/ui/RevealContent";
@@ -29,8 +31,10 @@ export default function HomePage() {
       <RevealContent>
         <Hero />
         <About />
+        <Skills />
         <Timeline />
         <FeaturedWork />
+        <GithubActivity />
         <Contact />
       </RevealContent>
     </Container>
