@@ -25,7 +25,9 @@ export function filterProjects(
 }
 
 export function sortByRecency(projects: Project[]): Project[] {
-  return [...projects].sort((a, b) => b.period.start.localeCompare(a.period.start));
+  return [...projects].sort((a, b) =>
+    b.period.start.localeCompare(a.period.start),
+  );
 }
 
 export function featuredProjects(projects: Project[]): Project[] {

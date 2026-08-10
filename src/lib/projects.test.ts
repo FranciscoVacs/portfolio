@@ -33,7 +33,11 @@ const contract = make({
   featured: true,
   period: { start: "2026-05" },
 });
-const client = make({ slug: "cl", category: "client", period: { start: "2025-03" } });
+const client = make({
+  slug: "cl",
+  category: "client",
+  period: { start: "2025-03" },
+});
 const all = [personal, contract, client];
 
 describe("parseWorkFilter", () => {
