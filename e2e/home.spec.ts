@@ -11,10 +11,14 @@ test("la home lista experiencia y educación", async ({ page }) => {
   await page.goto("/en");
   await expect(page.getByRole("heading", { name: "Experience" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Education" })).toBeVisible();
-  // exact: true distingue la empresa "Cunumi" del proyecto "CUNUMI",
-  // que también aparece en la home dentro de los destacados.
+  // La empresa y el producto se llaman igual, así que buscar "CUNUMI" suelto
+  // también engancharía la tarjeta de Trabajos destacados: hay que acotar la
+  // búsqueda a la sección de experiencia.
+  const experience = page
+    .locator("section")
+    .filter({ has: page.getByRole("heading", { name: "Experience" }) });
   await expect(
-    page.getByRole("heading", { name: "Cunumi", exact: true }),
+    experience.getByRole("heading", { name: "CUNUMI" }),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Universidad Tecnológica Nacional" }),

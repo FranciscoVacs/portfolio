@@ -1,68 +1,206 @@
 import { z } from "zod";
 
 /**
- * El calendario de contribuciones no está en la API REST pública de GitHub:
- * la oficial es GraphQL y exige un token. Este proxy público lo expone sin
- * credenciales, así que el sitio no necesita secretos para desplegarse.
+ * El calendario de contribuciones vive solo en la API GraphQL de GitHub, que
+ * pide autenticación. Hay dos fuentes, en este orden:
  *
- * Es un servicio de terceros: si cambia o se cae, fetchContributions devuelve
- * null y la sección desaparece en vez de romper la página.
+ * 1. GraphQL con GITHUB_CONTRIBUTIONS_TOKEN (scope `read:user`). Es la
+ *    oficial y la única que incluye los repositorios privados.
+ * 2. Un proxy público, sin credenciales, que solo ve lo público.
+ *
+ * El respaldo importa: si el token vence o se revoca, el calendario sigue
+ * apareciendo con los números públicos en vez de desaparecer. Y sin token
+ * configurado —desarrollo local, por ejemplo— el sitio funciona igual.
  */
-const ENDPOINT = "https://github-contributions-api.jogruber.de/v4";
+const PROXY_ENDPOINT = "https://github-contributions-api.jogruber.de/v4";
+const GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
 
 /** Medio día: el calendario cambia poco y esto evita pegarle en cada visita. */
 const REVALIDATE_SECONDS = 60 * 60 * 12;
 
-const responseSchema = z.object({
+/** Día del calendario, con la intensidad ya normalizada a 0..4. */
+export type ContributionDay = {
+  date: string;
+  count: number;
+  level: number;
+};
+
+export type ContributionCalendar = {
+  days: ContributionDay[];
+  total: number;
+  /** De dónde salieron los datos; `graphql` incluye repositorios privados. */
+  source: "graphql" | "proxy";
+};
+
+const proxySchema = z.object({
   contributions: z
     .array(
       z.object({
         date: z.iso.date(),
         count: z.int().nonnegative(),
-        /** Intensidad ya calculada por la API, de 0 (nada) a 4 (máximo). */
         level: z.int().min(0).max(4),
       }),
     )
     .min(1),
 });
 
-export type ContributionDay = z.infer<
-  typeof responseSchema
->["contributions"][number];
+/** GitHub devuelve la intensidad como enum, no como número. */
+const LEVELS = [
+  "NONE",
+  "FIRST_QUARTILE",
+  "SECOND_QUARTILE",
+  "THIRD_QUARTILE",
+  "FOURTH_QUARTILE",
+] as const;
 
-export type ContributionCalendar = {
-  days: ContributionDay[];
-  total: number;
-};
+const graphqlSchema = z.object({
+  data: z.object({
+    viewer: z.object({
+      login: z.string().min(1),
+      contributionsCollection: z.object({
+        contributionCalendar: z.object({
+          weeks: z
+            .array(
+              z.object({
+                contributionDays: z.array(
+                  z.object({
+                    date: z.iso.date(),
+                    contributionCount: z.int().nonnegative(),
+                    contributionLevel: z.enum(LEVELS),
+                  }),
+                ),
+              }),
+            )
+            .min(1),
+        }),
+      }),
+    }),
+  }),
+});
 
 /**
- * Devuelve el último año de contribuciones, o null ante cualquier problema
- * (red, formato inesperado, servicio caído). Nunca lanza: la home tiene que
- * renderizar igual sin este dato.
+ * Se consulta `viewer` —el dueño del token— y no `user(login:)`: solo la
+ * primera devuelve con certeza las contribuciones privadas. El login que
+ * vuelve se compara contra el perfil del sitio para no publicar por error el
+ * calendario de otra cuenta si el token no fuera el correcto.
+ */
+const QUERY = `{
+  viewer {
+    login
+    contributionsCollection {
+      contributionCalendar {
+        weeks {
+          contributionDays { date contributionCount contributionLevel }
+        }
+      }
+    }
+  }
+}`;
+
+/**
+ * Aplana la respuesta de GraphQL a la misma forma que devuelve el proxy, para
+ * que el resto del módulo no sepa de dónde vinieron los datos.
+ */
+export function daysFromGraphql(
+  payload: unknown,
+  expectedLogin: string,
+): ContributionDay[] | null {
+  const parsed = graphqlSchema.safeParse(payload);
+  if (!parsed.success) return null;
+
+  const { login, contributionsCollection } = parsed.data.data.viewer;
+  if (login.toLowerCase() !== expectedLogin.toLowerCase()) return null;
+
+  const days = contributionsCollection.contributionCalendar.weeks.flatMap(
+    (week) =>
+      week.contributionDays.map((day) => ({
+        date: day.date,
+        count: day.contributionCount,
+        level: LEVELS.indexOf(day.contributionLevel),
+      })),
+  );
+  return days.length > 0 ? days : null;
+}
+
+async function fromGraphql(
+  login: string,
+  token: string,
+): Promise<ContributionDay[] | null> {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: QUERY }),
+    // Sin esto Next no cachea un POST y la home dejaría de prerenderizarse.
+    cache: "force-cache",
+    next: { revalidate: REVALIDATE_SECONDS },
+  });
+  if (!response.ok) return null;
+  return daysFromGraphql(await response.json(), login);
+}
+
+async function fromProxy(login: string): Promise<ContributionDay[] | null> {
+  const response = await fetch(
+    `${PROXY_ENDPOINT}/${encodeURIComponent(login)}?y=last`,
+    { next: { revalidate: REVALIDATE_SECONDS } },
+  );
+  if (!response.ok) return null;
+
+  const parsed = proxySchema.safeParse(await response.json());
+  return parsed.success ? parsed.data.contributions : null;
+}
+
+/**
+ * Devuelve el último año de contribuciones, o null si ninguna de las dos
+ * fuentes responde. Nunca lanza: la home tiene que renderizar igual sin este
+ * dato.
  */
 export async function fetchContributions(
   username: string,
 ): Promise<ContributionCalendar | null> {
-  try {
-    const response = await fetch(
-      `${ENDPOINT}/${encodeURIComponent(username)}?y=last`,
-      { next: { revalidate: REVALIDATE_SECONDS } },
-    );
-    if (!response.ok) return null;
+  const token = process.env.GITHUB_CONTRIBUTIONS_TOKEN;
 
-    const parsed = responseSchema.safeParse(await response.json());
-    if (!parsed.success) return null;
+  const attempts: {
+    source: "graphql" | "proxy";
+    run: () => Promise<ContributionDay[] | null>;
+  }[] = [
+    ...(token
+      ? [
+          {
+            source: "graphql" as const,
+            run: () => fromGraphql(username, token),
+          },
+        ]
+      : []),
+    { source: "proxy" as const, run: () => fromProxy(username) },
+  ];
 
-    const days = parsed.data.contributions;
-    return {
-      days,
-      // Se suma en vez de leer el `total` de la respuesta para que el número
-      // que se muestra coincida siempre con los cuadrados que se dibujan.
-      total: days.reduce((sum, day) => sum + day.count, 0),
-    };
-  } catch {
-    return null;
+  for (const attempt of attempts) {
+    try {
+      const days = await attempt.run();
+      if (!days) continue;
+      if (token && attempt.source === "proxy") {
+        // Sin este aviso, un token vencido solo se nota en que el total baja
+        // de golpe: el calendario sigue apareciendo, pero sin lo privado.
+        console.warn(
+          "[github] GITHUB_CONTRIBUTIONS_TOKEN configurado pero GraphQL no respondió; se usaron solo las contribuciones públicas.",
+        );
+      }
+      return {
+        days,
+        // Se suma en vez de leer el total que informa cada fuente para que el
+        // número que se muestra coincida siempre con los cuadrados dibujados.
+        total: days.reduce((sum, day) => sum + day.count, 0),
+        source: attempt.source,
+      };
+    } catch {
+      // Se prueba la fuente siguiente.
+    }
   }
+
+  return null;
 }
 
 /**
