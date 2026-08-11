@@ -3,7 +3,7 @@ import { DottedUnderline } from "@/components/ui/DottedLink";
 import { Link } from "@/i18n/navigation";
 import type { WorkFilter } from "@/lib/projects";
 
-const FILTERS: WorkFilter[] = ["all", "personal", "contract", "client"];
+const FILTERS: WorkFilter[] = ["all", "personal", "contract"];
 
 export function WorkFilters({ active }: { active: WorkFilter }) {
   const t = useTranslations("Work");

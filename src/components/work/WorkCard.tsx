@@ -35,29 +35,33 @@ export function WorkCard({ project }: { project: Project }) {
           </span>
         </div>
 
-        {/* La miniatura acompaña a la descripción en vez de encabezar la
-            tarjeta: en pantallas angostas vuelve a apilarse arriba. */}
-        <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-start">
+        {/* La miniatura flota y el texto la envuelve: con dos columnas
+            quedaba un hueco debajo de la imagen cada vez que la descripción
+            era más alta que ella. La proporción es fija para que todas las
+            tarjetas muestren la misma caja, sin importar el alto original. */}
+        <div className="mt-3">
           {project.image ? (
             <Image
               src={project.image.src}
               alt={project.image.alt[locale]}
               width={project.image.width}
               height={project.image.height}
-              sizes="(min-width: 40rem) 200px, 100vw"
-              className="h-auto w-full rounded-md border border-border sm:w-[200px] sm:shrink-0"
+              sizes="(min-width: 40rem) 190px, 100vw"
+              className="mb-4 aspect-[4/3] w-full rounded-md border border-border object-cover sm:float-left sm:mr-5 sm:mb-2 sm:w-[190px]"
             />
           ) : null}
 
-          <div className="min-w-0 flex-1">
-            <p className="text-foreground leading-relaxed">
-              {project.summary[locale]}
-            </p>
+          <p className="text-foreground leading-relaxed">
+            {project.summary[locale]}
+          </p>
 
-            <p className="mt-3 text-foreground text-sm leading-relaxed">
-              {project.story[locale]}
-            </p>
-          </div>
+          <p className="mt-3 text-foreground text-sm leading-relaxed">
+            {project.story[locale]}
+          </p>
+
+          {/* Corta el float para que el stack no se meta al costado de la
+              miniatura cuando el texto es corto. */}
+          <div className="clear-both" />
         </div>
 
         <ul className="mt-4 flex flex-wrap gap-2">

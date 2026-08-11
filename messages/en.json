@@ -28,7 +28,6 @@
     "all": "All",
     "personal": "Personal",
     "contract": "Contract",
-    "client": "Client",
     "empty": "No projects in this category yet.",
     "liveDemo": "Live demo",
     "sourceCode": "Source code",

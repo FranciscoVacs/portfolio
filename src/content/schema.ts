@@ -4,7 +4,7 @@ export const LOCALES = ["en", "es"] as const;
 export type Locale = (typeof LOCALES)[number];
 export type Localized<T> = Record<Locale, T>;
 
-export const PROJECT_CATEGORIES = ["personal", "contract", "client"] as const;
+export const PROJECT_CATEGORIES = ["personal", "contract"] as const;
 export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number];
 
 export const FAV_CATEGORIES = [

@@ -14,11 +14,13 @@ test("el filtro de contratos deja solo CUNUMI", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Bohemia" })).toHaveCount(0);
 });
 
-test("el filtro de clientes muestra el mensaje de vacío", async ({ page }) => {
-  await page.goto("/en/work?type=client");
-  await expect(
-    page.getByText("No projects in this category yet."),
-  ).toBeVisible();
+test("solo quedan las dos categorías reales", async ({ page }) => {
+  // "Clientes" se retiró: si vuelve a aparecer, es que quedó una traducción
+  // suelta o un filtro sin limpiar.
+  await page.goto("/en/work");
+  const filters = page.getByRole("navigation", { name: "Filter by category" });
+  await expect(filters.getByRole("link")).toHaveCount(3);
+  await expect(filters.getByText("Client")).toHaveCount(0);
 });
 
 test("un filtro inválido cae en todos", async ({ page }) => {
@@ -51,10 +53,35 @@ test("la miniatura queda al costado de la descripción", async ({ page }) => {
   await page.goto("/en/work");
   const card = page.getByRole("article").first();
   const image = await card.locator("img").boundingBox();
-  const text = await card.locator("p").first().boundingBox();
-  if (!image || !text) throw new Error("faltan la miniatura o la descripción");
-  // Misma banda vertical y el texto arrancando después de la imagen: si
-  // volviera a apilarse, el texto empezaría en el mismo borde izquierdo.
-  expect(text.x).toBeGreaterThan(image.x + image.width);
-  expect(Math.abs(text.y - image.y)).toBeLessThan(40);
+  if (!image) throw new Error("falta la miniatura");
+
+  // La miniatura flota, así que la caja del párrafo ocupa todo el ancho y
+  // solo las líneas se acortan: hay que medir la primera línea, no el <p>.
+  const firstLineX = await card
+    .locator("p")
+    .first()
+    .evaluate((el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      return range.getClientRects()[0].x;
+    });
+
+  expect(firstLineX).toBeGreaterThan(image.x + image.width);
+});
+
+test("todas las miniaturas tienen la misma caja", async ({ page }) => {
+  // Sin proporción fija, cada tarjeta mostraba la imagen con el alto de su
+  // archivo original y el listado quedaba desparejo.
+  await page.goto("/en/work");
+  const images = page.getByRole("article").locator("img");
+  const count = await images.count();
+  expect(count).toBeGreaterThan(1);
+
+  const boxes = [];
+  for (let i = 0; i < count; i++) {
+    const box = await images.nth(i).boundingBox();
+    if (!box) throw new Error(`falta la miniatura ${i}`);
+    boxes.push(`${Math.round(box.width)}x${Math.round(box.height)}`);
+  }
+  expect(new Set(boxes).size, boxes.join(" / ")).toBe(1);
 });

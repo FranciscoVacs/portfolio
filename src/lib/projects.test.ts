@@ -33,12 +33,12 @@ const contract = make({
   featured: true,
   period: { start: "2026-05" },
 });
-const client = make({
-  slug: "cl",
-  category: "client",
+const otroPersonal = make({
+  slug: "p2",
+  category: "personal",
   period: { start: "2025-03" },
 });
-const all = [personal, contract, client];
+const all = [personal, contract, otroPersonal];
 
 describe("parseWorkFilter", () => {
   it('devuelve "all" cuando no hay parámetro', () => {
@@ -64,7 +64,7 @@ describe("filterProjects", () => {
   });
 
   it("devuelve lista vacía si ninguna coincide", () => {
-    expect(filterProjects([personal], "client")).toEqual([]);
+    expect(filterProjects([personal], "contract")).toEqual([]);
   });
 
   it("no muta el arreglo original", () => {
@@ -75,7 +75,7 @@ describe("filterProjects", () => {
 
 describe("sortByRecency", () => {
   it("ordena del más reciente al más antiguo", () => {
-    expect(sortByRecency(all).map((p) => p.slug)).toEqual(["c", "cl", "p"]);
+    expect(sortByRecency(all).map((p) => p.slug)).toEqual(["c", "p2", "p"]);
   });
 });
 

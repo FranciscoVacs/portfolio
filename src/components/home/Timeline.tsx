@@ -19,13 +19,18 @@ function InstitutionName({ item }: { item: EducationItem }) {
   const content = (
     <>
       {item.logo ? (
-        <Image
-          src={item.logo.src}
-          alt=""
-          width={item.logo.width}
-          height={item.logo.height}
-          className="h-9 w-28 shrink-0 object-contain object-left"
-        />
+        // Ficha cuadrada comun: los isotipos van de 0.85:1 a 2:1 y uno trae
+        // fondo negro solido. Encuadrarlos en una caja clara los deja del
+        // mismo peso visual y contiene el bloque oscuro.
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-md border border-border bg-paper p-1.5">
+          <Image
+            src={item.logo.src}
+            alt=""
+            width={item.logo.width}
+            height={item.logo.height}
+            className="max-h-8 max-w-8 object-contain"
+          />
+        </span>
       ) : null}
       <span className="relative">
         {item.institution}
@@ -90,8 +95,8 @@ export function Timeline() {
                   {formatPeriod(item.period, present, locale)}
                 </span>
               </div>
-              {/* Alineado con el texto del encabezado, no con el logo. */}
-              <p className="mt-1 pl-[7.75rem] font-mono text-soft text-xs">
+              {/* Alineado con el texto del encabezado, no con la ficha. */}
+              <p className="mt-1 pl-14 font-mono text-soft text-xs">
                 {item.degree[locale]}
               </p>
             </li>
