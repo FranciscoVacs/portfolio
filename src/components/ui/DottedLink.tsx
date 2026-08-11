@@ -1,6 +1,13 @@
-import { useId } from "react";
 import { Link } from "@/i18n/navigation";
 
+/**
+ * Subrayado de puntos.
+ *
+ * Se dibuja con un gradiente repetido en vez de un patrón SVG porque
+ * `background-position: center` centra la serie de puntos respecto al ancho
+ * del texto: con un patrón SVG los puntos arrancan pegados al borde izquierdo
+ * y el último queda cortado a la mitad.
+ */
 export function DottedUnderline({
   onlyOnHover = false,
   forceVisible = false,
@@ -8,29 +15,24 @@ export function DottedUnderline({
   onlyOnHover?: boolean;
   forceVisible?: boolean;
 }) {
-  const id = useId();
-
   return (
-    <svg
+    <span
       aria-hidden="true"
-      preserveAspectRatio="none"
-      style={{ height: 4 }}
-      className={`pointer-events-none absolute -bottom-[3px] left-0 w-full text-foreground transition-[color,opacity] duration-200 group-hover:text-brand${
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at center, currentColor 0 1px, transparent 1.2px)",
+        backgroundSize: "6px 3px",
+        backgroundRepeat: "repeat-x",
+        backgroundPosition: "center bottom",
+      }}
+      className={`pointer-events-none absolute inset-x-0 -bottom-[3px] h-[3px] text-soft transition-[color,opacity] duration-200 group-hover:text-brand${
         onlyOnHover
           ? forceVisible
             ? " opacity-100"
             : " opacity-0 group-hover:opacity-100"
           : ""
       }`}
-    >
-      <title>‌</title>
-      <defs>
-        <pattern id={id} width="6" height="4" patternUnits="userSpaceOnUse">
-          <circle cx="3" cy="2" r="1" fill="currentColor" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill={`url(#${id})`} />
-    </svg>
+    />
   );
 }
 

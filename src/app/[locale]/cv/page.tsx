@@ -27,7 +27,7 @@ export default function CvPage() {
     <Container>
       <div className="pt-14">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h1 className="font-semibold text-2xl text-primary tracking-tight">
+          <h1 className="text-[2.1rem] text-primary leading-tight">
             {t("title")}
           </h1>
           <a

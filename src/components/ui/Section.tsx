@@ -6,8 +6,8 @@ export function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mt-14">
-      <h2 className="mb-5 font-medium text-primary text-lg">{title}</h2>
+    <section className="mt-16">
+      <h2 className="mb-6 text-[1.7rem] text-primary leading-tight">{title}</h2>
       {children}
     </section>
   );

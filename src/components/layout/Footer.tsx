@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="mt-20 border-border border-t py-8">
       <Container>
         <div className="flex flex-wrap items-center justify-between gap-4 text-foreground text-sm">
-          <span>
+          <span className="font-mono text-xs">
             © {new Date().getFullYear()} {profile.name}
           </span>
           <div className="flex gap-4">

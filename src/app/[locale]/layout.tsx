@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -10,6 +10,19 @@ import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+/** Serif de los títulos: solo existe en un peso, de ahí el weight fijo. */
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+});
+
+/** Monoespaciada para fechas, etiquetas y todo lo que sea metadato. */
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono-brand",
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -56,7 +69,9 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${display.variable} ${mono.variable} font-sans antialiased`}
+      >
         <NextIntlClientProvider>
           <div className="flex min-h-screen flex-col">
             <Nav />

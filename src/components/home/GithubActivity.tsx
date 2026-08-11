@@ -42,7 +42,7 @@ export async function GithubActivity() {
 
   return (
     <Section title={t("githubActivity")}>
-      <p className="-mt-2 mb-4 text-foreground text-sm">
+      <p className="-mt-3 mb-5 font-mono text-foreground text-xs">
         {t("contributions", { count: calendar.total })}
       </p>
 
@@ -61,7 +61,7 @@ export async function GithubActivity() {
             {months.map((label, index) => (
               <span
                 key={label.column}
-                className="mb-1 text-[10px] text-foreground leading-none"
+                className="mb-1.5 font-mono text-[10px] text-soft leading-none"
                 style={{
                   gridColumn: `${label.column + 1} / ${
                     months[index + 1]?.column + 1 || weeks.length + 1
@@ -88,7 +88,7 @@ export async function GithubActivity() {
                 ) : (
                   <span
                     key={day.date}
-                    title={`${t("contributionsOn", { count: day.count })} — ${dayLabel.format(new Date(`${day.date}T00:00:00Z`))}`}
+                    title={`${t("contributionsOn", { count: day.count })} - ${dayLabel.format(new Date(`${day.date}T00:00:00Z`))}`}
                     className="aspect-square w-full rounded-[2px] ring-1 ring-black/[0.04] ring-inset"
                     style={{ backgroundColor: LEVEL_COLORS[day.level] }}
                   />
@@ -100,7 +100,7 @@ export async function GithubActivity() {
 
       {/* Fuera del contenedor que se desplaza: la referencia de la escala
           tiene que verse aunque el calendario esté corrido. */}
-      <div className="mt-2 flex items-center justify-end gap-1.5 text-[10px] text-foreground">
+      <div className="mt-3 flex items-center justify-end gap-1.5 font-mono text-[10px] text-soft">
         <span>{t("less")}</span>
         {LEVEL_COLORS.map((color) => (
           <span

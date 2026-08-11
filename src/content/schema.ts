@@ -20,11 +20,6 @@ const localizedString = z.object({
   es: z.string().min(1),
 });
 
-const localizedStringList = z.object({
-  en: z.array(z.string().min(1)).min(1),
-  es: z.array(z.string().min(1)).min(1),
-});
-
 /** Mes en formato YYYY-MM, por ejemplo 2026-05. */
 const yearMonth = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, {
   message: "El período debe tener formato YYYY-MM",
@@ -45,7 +40,8 @@ export const projectSchema = z.object({
   featured: z.boolean(),
   period,
   summary: localizedString,
-  highlights: localizedStringList,
+  /** Qué se construyó y con qué criterio, en prosa. */
+  story: localizedString,
   stack: z.array(z.string().min(1)).min(1),
   links: z.object({
     live: z.url().optional(),
@@ -76,7 +72,11 @@ export const experienceSchema = z.object({
   role: localizedString,
   location: z.string().min(1),
   period,
-  highlights: localizedStringList,
+  /**
+   * Prosa, no viñetas: un portfolio se lee distinto que un currículum, y una
+   * lista de logros sueltos obliga a quien lee a reconstruir la historia.
+   */
+  story: localizedString,
 });
 
 export const educationSchema = z.object({
@@ -84,6 +84,20 @@ export const educationSchema = z.object({
   degree: localizedString,
   location: z.string().min(1),
   period,
+  /** Sitio oficial de la institución. */
+  url: z.url().optional(),
+  /**
+   * Logo institucional. Las dimensiones reales son obligatorias: los logos
+   * vienen con proporciones muy distintas y sin ellas no se los puede
+   * encuadrar a todos en la misma caja.
+   */
+  logo: z
+    .object({
+      src: z.string().startsWith("/"),
+      width: z.int().positive(),
+      height: z.int().positive(),
+    })
+    .optional(),
 });
 
 export const profileSchema = z.object({

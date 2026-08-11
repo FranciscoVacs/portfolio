@@ -8,7 +8,7 @@ const validProject = {
   featured: false,
   period: { start: "2024-01" },
   summary: { en: "A demo", es: "Una demo" },
-  highlights: { en: ["One"], es: ["Uno"] },
+  story: { en: "One", es: "Uno" },
   stack: ["TypeScript"],
   links: {},
 };

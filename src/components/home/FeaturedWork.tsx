@@ -13,12 +13,14 @@ export function FeaturedWork() {
 
   return (
     <Section title={t("featuredWork")}>
-      <ul className="flex flex-col gap-6">
+      <ul className="flex flex-col gap-7">
         {featured.map((project) => (
           <li key={project.slug}>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="font-medium text-primary">{project.title}</h3>
-              <span className="text-foreground text-sm">
+              <h3 className="text-[1.2rem] text-primary leading-tight">
+                {project.title}
+              </h3>
+              <span className="font-mono text-foreground text-xs tracking-tight">
                 {formatPeriod(project.period, t("present"), locale)}
               </span>
             </div>

@@ -18,7 +18,7 @@ export function TechBadge({
 
   return (
     <span
-      className={`inline-flex items-center rounded-md border border-border bg-muted font-medium text-primary transition-colors hover:border-foreground/30 ${
+      className={`inline-flex items-center rounded-md border border-border bg-paper font-mono text-primary transition-colors hover:border-soft ${
         md ? "gap-2 px-3 py-1.5 text-sm" : "gap-1.5 px-2 py-1 text-xs"
       }`}
     >

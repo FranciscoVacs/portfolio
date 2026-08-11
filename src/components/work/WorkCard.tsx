@@ -27,8 +27,10 @@ export function WorkCard({ project }: { project: Project }) {
     <HoverCard>
       <article>
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="font-medium text-primary">{project.title}</h2>
-          <span className="text-foreground text-sm">
+          <h2 className="text-[1.3rem] text-primary leading-tight">
+            {project.title}
+          </h2>
+          <span className="font-mono text-foreground text-xs tracking-tight">
             {formatPeriod(project.period, tHome("present"), locale)}
           </span>
         </div>
@@ -52,11 +54,9 @@ export function WorkCard({ project }: { project: Project }) {
               {project.summary[locale]}
             </p>
 
-            <ul className="mt-3 flex list-disc flex-col gap-1 pl-5 text-foreground text-sm">
-              {project.highlights[locale].map((highlight) => (
-                <li key={highlight}>{highlight}</li>
-              ))}
-            </ul>
+            <p className="mt-3 text-foreground text-sm leading-relaxed">
+              {project.story[locale]}
+            </p>
           </div>
         </div>
 

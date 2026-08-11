@@ -19,7 +19,7 @@ export function Hero() {
         />
       ) : null}
       <div>
-        <h1 className="font-semibold text-2xl text-primary tracking-tight">
+        <h1 className="text-[2.1rem] text-primary leading-tight">
           {profile.name}
         </h1>
         <p className="mt-1 text-foreground">{profile.headline[locale]}</p>

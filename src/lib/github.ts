@@ -10,7 +10,7 @@ import { z } from "zod";
  *
  * El respaldo importa: si el token vence o se revoca, el calendario sigue
  * apareciendo con los números públicos en vez de desaparecer. Y sin token
- * configurado —desarrollo local, por ejemplo— el sitio funciona igual.
+ * configurado -desarrollo local, por ejemplo- el sitio funciona igual.
  */
 const PROXY_ENDPOINT = "https://github-contributions-api.jogruber.de/v4";
 const GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
@@ -79,7 +79,7 @@ const graphqlSchema = z.object({
 });
 
 /**
- * Se consulta `viewer` —el dueño del token— y no `user(login:)`: solo la
+ * Se consulta `viewer` -el dueño del token- y no `user(login:)`: solo la
  * primera devuelve con certeza las contribuciones privadas. El login que
  * vuelve se compara contra el perfil del sitio para no publicar por error el
  * calendario de otra cuenta si el token no fuera el correcto.

@@ -15,7 +15,7 @@ function make(overrides: Partial<Project>): Project {
     featured: false,
     period: { start: "2024-01" },
     summary: { en: "a", es: "a" },
-    highlights: { en: ["a"], es: ["a"] },
+    story: { en: "a", es: "a" },
     stack: ["TypeScript"],
     links: {},
     ...overrides,

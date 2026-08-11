@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { DottedUnderline } from "@/components/ui/DottedLink";
 import { Link } from "@/i18n/navigation";
 import type { WorkFilter } from "@/lib/projects";
 
@@ -10,7 +11,7 @@ export function WorkFilters({ active }: { active: WorkFilter }) {
   return (
     <nav
       aria-label={t("filterLabel")}
-      className="mt-8 flex flex-wrap gap-4 text-sm"
+      className="mt-8 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-wide"
     >
       {FILTERS.map((filter) => (
         <Link
@@ -22,11 +23,14 @@ export function WorkFilters({ active }: { active: WorkFilter }) {
           }
           className={
             filter === active
-              ? "font-medium text-primary underline underline-offset-4"
-              : "text-foreground transition-colors hover:text-primary"
+              ? "group text-primary transition-colors"
+              : "group text-foreground transition-colors hover:text-primary"
           }
         >
-          {t(filter)}
+          <span className="relative inline-block">
+            {t(filter)}
+            <DottedUnderline onlyOnHover forceVisible={filter === active} />
+          </span>
         </Link>
       ))}
     </nav>

@@ -35,8 +35,14 @@ const WANTED = [
   ["Docker", "docker"],
 ];
 
-/** Contraste minimo del logo contra el fondo claro del badge. */
+// LinkedIn no esta en simple-icons (la marca pidio que lo retiraran), asi que
+// los logos de contacto viven aparte, en src/lib/social-icons.ts.
+
+/** Contraste minimo del logo contra el fondo del badge. */
 const MIN_CONTRAST = 3;
+
+/** Fondo real sobre el que se dibujan los logos: el papel del sitio. */
+const BACKGROUND = "F5F1E8";
 
 const toLinear = (v) =>
   v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
@@ -45,7 +51,8 @@ const luminance = (hex) =>
   0.2126 * toLinear(channel(hex, 0)) +
   0.7152 * toLinear(channel(hex, 2)) +
   0.0722 * toLinear(channel(hex, 4));
-const contrast = (hex) => 1.05 / (luminance(hex) + 0.05);
+const contrast = (hex) =>
+  (luminance(BACKGROUND) + 0.05) / (luminance(hex) + 0.05);
 
 /**
  * Oscurece multiplicando los tres canales por igual: baja la luminancia sin
@@ -117,11 +124,10 @@ writeFileSync(
  * \`simple-icons\` (CC0-1.0). Se vuelca aca para no arrastrar 15 MB de
  * dependencia ni depender de shields.io en runtime.
  *
- * \`hex\` no siempre es el color de marca exacto: los logos que sobre fondo
- * claro quedaban por debajo de ${MIN_CONTRAST}:1 de contraste (React #61DAFB,
- * Supabase #3FCF8E, JavaScript #F7DF1E, Tailwind #06B6D4) se oscurecen
- * multiplicando los tres canales por igual, que baja la luminancia sin mover
- * el matiz.
+ * \`hex\` no siempre es el color de marca exacto: los logos que sobre el papel
+ * del sitio (#${BACKGROUND}) quedaban por debajo de ${MIN_CONTRAST}:1 de
+ * contraste se oscurecen multiplicando los tres canales por igual, que baja la
+ * luminancia sin mover el matiz.
  */
 export type TechIcon = {
   /** Color del logo, ya ajustado para leerse sobre fondo claro. */

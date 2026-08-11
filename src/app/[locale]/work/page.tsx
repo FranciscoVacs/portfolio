@@ -36,7 +36,7 @@ export default async function WorkPage({
   return (
     <Container>
       <div className="pt-14">
-        <h1 className="font-semibold text-2xl text-primary tracking-tight">
+        <h1 className="text-[2.1rem] text-primary leading-tight">
           {t("title")}
         </h1>
         <p className="mt-2 text-foreground">{t("subtitle")}</p>

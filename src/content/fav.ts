@@ -13,7 +13,7 @@ export const favItems: FavItem[] = parseAll(
       },
     },
     {
-      name: "Theo — t3.gg",
+      name: "Theo - t3.gg",
       url: "https://www.youtube.com/@t3dotgg",
       category: "youtube",
       note: {

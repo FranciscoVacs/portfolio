@@ -2,25 +2,32 @@
 
 @theme inline {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), "Iowan Old Style", Georgia, serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+    var(--font-mono-brand), ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
 
   --color-background: var(--background);
+  --color-paper: var(--paper);
   --color-primary: var(--primary);
   --color-foreground: var(--foreground);
+  --color-soft: var(--soft);
   --color-brand: var(--brand);
   --color-muted: var(--muted);
   --color-border: var(--border);
 }
 
 :root {
-  --background: #fff;
-  --primary: #111;
-  --foreground: #666;
-  --brand: #2d5ba4;
-  --muted: color-mix(in oklab, #111 6%, #fff);
-  --border: color-mix(in oklab, #111 12%, #fff);
+  /* Papel cálido en lugar de blanco puro: el texto descansa mejor y los
+     logos de marca no quedan flotando sobre un fondo clínico. */
+  --background: #f5f1e8;
+  --paper: #faf7f0;
+  --primary: #1a1a1a;
+  --foreground: #6b6560;
+  --soft: #8a847d;
+  --brand: #1e2a78;
+  --muted: color-mix(in oklab, #1a1a1a 5%, #f5f1e8);
+  --border: #d6cfc0;
 }
 
 body {
@@ -32,8 +39,17 @@ body {
 }
 
 p {
-  text-align: justify;
   text-wrap: pretty;
+}
+
+/* Los títulos van en serif y sin negrita: el contraste lo da la familia
+   tipográfica, no el peso. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
 }
 
 .js .reveal-content > :not(.reveal-content) {

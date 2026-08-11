@@ -13,9 +13,11 @@ export function FavGroup({
   const locale = useLocale() as Locale;
 
   return (
-    <section className="mt-12">
-      <h2 className="mb-4 font-medium text-primary text-lg">{t(category)}</h2>
-      <ul className="flex flex-col gap-5">
+    <section className="mt-14">
+      <h2 className="mb-5 text-[1.4rem] text-primary leading-tight">
+        {t(category)}
+      </h2>
+      <ul className="flex flex-col gap-6">
         {items.map((item) => (
           <li key={item.url}>
             <DottedLink href={item.url} external>

@@ -13,17 +13,9 @@ export const projects: Project[] = parseAll(
         en: "Pet management, business management and social networking platform, shipped as a PWA and as a React Native app.",
         es: "Plataforma de gestión de mascotas, gestión de negocios y red social, publicada como PWA y como app React Native.",
       },
-      highlights: {
-        en: [
-          "Designed and implemented the PostgreSQL schema on Supabase.",
-          "Migrated the whole backend from Firebase to Supabase.",
-          "Replaced the PWA with a cross-platform React Native app built with Expo.",
-        ],
-        es: [
-          "Diseñé e implementé el esquema PostgreSQL sobre Supabase.",
-          "Migré todo el backend de Firebase a Supabase.",
-          "Reemplacé la PWA por una app multiplataforma en React Native con Expo.",
-        ],
+      story: {
+        en: "The data model came first: a PostgreSQL schema on Supabase that had to hold pets, allied businesses and a social feed without turning into three separate products. The backend started on Firebase and I moved all of it to Supabase. The app shipped as a PWA until that stopped being enough, and then became a React Native app with Expo.",
+        es: "El modelo de datos vino primero: un esquema PostgreSQL sobre Supabase que tenía que sostener mascotas, negocios aliados y un feed social sin convertirse en tres productos distintos. El backend arrancó en Firebase y lo migré entero a Supabase. La app se publicó como PWA hasta que eso dejó de alcanzar, y ahí pasó a ser una app React Native con Expo.",
       },
       stack: ["React Native", "Expo", "TypeScript", "Supabase", "PostgreSQL"],
       links: { live: "https://cunumi.app/welcome" },
@@ -47,17 +39,9 @@ export const projects: Project[] = parseAll(
         en: "Event management and ticketing platform with dynamic ticket generation, automated email delivery and payment gateway integration.",
         es: "Plataforma de gestión de eventos y venta de entradas, con generación dinámica de tickets, envío automático de mails e integración con pasarela de pago.",
       },
-      highlights: {
-        en: [
-          "Built the frontend with Angular and Tailwind CSS.",
-          "Developed a REST API covering authentication, events and galleries, with data persistence.",
-          "Implemented dynamic ticket generation, automated email delivery and payment gateway integration.",
-        ],
-        es: [
-          "Construí el frontend con Angular y Tailwind CSS.",
-          "Desarrollé una API REST para autenticación, eventos y galerías, con persistencia de datos.",
-          "Implementé la generación dinámica de tickets, el envío automático de mails y la integración con la pasarela de pago.",
-        ],
+      story: {
+        en: "A ticketing platform for a real venue, which meant the interesting part was never the interface: tickets are generated on the fly, mail goes out on its own and money changes hands through a payment gateway. I built the Angular frontend and the REST API behind it, covering authentication, events and galleries.",
+        es: "Una plataforma de entradas para un lugar que existe, así que lo interesante nunca fue la interfaz: los tickets se generan al vuelo, los mails salen solos y hay plata pasando por una pasarela de pago. Construí el frontend en Angular y la API REST detrás, con autenticación, eventos y galerías.",
       },
       stack: ["Angular", "TypeScript", "Tailwind CSS", "Node.js", "REST API"],
       links: { live: "https://www.bohemia-socialclub.me" },

@@ -8,7 +8,7 @@ export default function LocaleNotFound() {
   return (
     <Container>
       <div className="py-24">
-        <h1 className="font-semibold text-2xl text-primary tracking-tight">
+        <h1 className="text-[2.1rem] text-primary leading-tight">
           {t("title")}
         </h1>
         <p className="mt-2 text-foreground">{t("description")}</p>
