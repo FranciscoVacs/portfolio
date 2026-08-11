@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { DottedUnderline } from "@/components/ui/DottedLink";
 import { profile } from "@/content/profile";
+import type { Locale } from "@/content/schema";
 import { alternatesFor } from "@/lib/site";
 
 export async function generateMetadata({
@@ -22,6 +23,9 @@ export async function generateMetadata({
 
 export default function CvPage() {
   const t = useTranslations("Cv");
+  const locale = useLocale() as Locale;
+  // Cada idioma muestra y descarga su propio PDF.
+  const cv = profile.cv[locale];
 
   return (
     <Container>
@@ -31,7 +35,7 @@ export default function CvPage() {
             {t("title")}
           </h1>
           <a
-            href={profile.cv}
+            href={cv}
             download
             className="group text-primary text-sm transition-colors hover:text-brand"
           >
@@ -45,7 +49,7 @@ export default function CvPage() {
       </div>
 
       <object
-        data={profile.cv}
+        data={cv}
         type="application/pdf"
         className="mt-10 h-[80vh] w-full rounded-lg border border-border"
         aria-label={t("title")}
@@ -53,7 +57,7 @@ export default function CvPage() {
         <p className="p-6 text-foreground">
           {t("fallback")}{" "}
           <a
-            href={profile.cv}
+            href={cv}
             download
             className="group text-primary transition-colors hover:text-brand"
           >

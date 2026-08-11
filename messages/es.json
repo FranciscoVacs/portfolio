@@ -44,7 +44,7 @@
   },
   "Cv": {
     "title": "CV",
-    "subtitle": "Mi currículum, en inglés.",
+    "subtitle": "Mi currículum, también disponible en inglés.",
     "download": "Descargar PDF",
     "fallback": "Tu navegador no puede mostrar el PDF embebido."
   },

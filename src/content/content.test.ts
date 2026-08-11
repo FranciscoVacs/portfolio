@@ -70,6 +70,17 @@ describe("contenido del sitio", () => {
     expect(new Set(skills).size).toBe(skills.length);
   });
 
+  it("tiene el PDF del currículum de cada idioma en public/", () => {
+    for (const [locale, path] of Object.entries(profile.cv)) {
+      const file = join(process.cwd(), "public", path);
+      expect(() => readFileSync(file), locale).not.toThrow();
+    }
+  });
+
+  it("sirve un PDF distinto por idioma", () => {
+    expect(profile.cv.en).not.toBe(profile.cv.es);
+  });
+
   it("no repite URLs en FAV", () => {
     const urls = favItems.map((f) => f.url);
     expect(new Set(urls).size).toBe(urls.length);

@@ -110,7 +110,11 @@ export const profileSchema = z.object({
   linkedin: z.url(),
   whatsapp: z.url().optional(),
   avatar: z.string().startsWith("/").optional(),
-  cv: z.string().startsWith("/"),
+  /** Un PDF por idioma: cada visitante se lleva el currículum en el suyo. */
+  cv: z.object({
+    en: z.string().startsWith("/"),
+    es: z.string().startsWith("/"),
+  }),
 });
 
 export type Project = z.infer<typeof projectSchema>;

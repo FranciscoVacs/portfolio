@@ -15,5 +15,8 @@ export const profile: Profile = profileSchema.parse({
   github: "https://github.com/FranciscoVacs",
   linkedin: "https://linkedin.com/in/francisco-vacs",
   avatar: "/avatar.png",
-  cv: "/cv/francisco-vacs-cv-en.pdf",
+  cv: {
+    en: "/cv/francisco-vacs-cv-en.pdf",
+    es: "/cv/francisco-vacs-cv-es.pdf",
+  },
 });
