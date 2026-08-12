@@ -2,7 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
-export function RevealContent({ children }: { children: React.ReactNode }) {
+export function RevealContent({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,7 +48,7 @@ export function RevealContent({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div ref={ref} className="reveal-content">
+    <div ref={ref} className={`reveal-content ${className}`.trim()}>
       {children}
     </div>
   );

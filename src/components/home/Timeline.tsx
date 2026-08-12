@@ -8,50 +8,71 @@ import type { EducationItem, Locale } from "@/content/schema";
 import { formatPeriod } from "@/lib/format";
 
 /**
- * Encabezado de una institución: logo y nombre dentro de un mismo enlace, para
- * que sea un solo destino de teclado en vez de dos que van al mismo lado.
+ * Ficha del logo institucional.
  *
- * El logo va en una caja de medidas fijas con object-contain: los tres tienen
- * proporciones muy distintas (5:1, 4:1 y 2:1) y sin encuadrarlos el más
- * apaisado se vería del doble de ancho que el resto.
+ * Los isotipos van de 0.85:1 a 2:1 y el de la EPCTV trae fondo negro sólido,
+ * así que se encuadran en una caja cuadrada clara: los deja del mismo peso
+ * visual y contiene el bloque oscuro.
+ *
+ * Cuando hay enlace, la ficha también lleva al sitio, pero sale del orden de
+ * tabulación y del árbol de accesibilidad: el nombre de al lado ya ofrece ese
+ * mismo destino y repetirlo obliga a pasar dos veces por lo mismo.
  */
-function InstitutionName({ item }: { item: EducationItem }) {
-  const content = (
+function InstitutionLogo({ item }: { item: EducationItem }) {
+  if (!item.logo) return null;
+
+  const badge = (
+    <span className="flex size-11 shrink-0 items-center justify-center rounded-md border border-border bg-paper p-1.5">
+      <Image
+        src={item.logo.src}
+        alt=""
+        width={item.logo.width}
+        height={item.logo.height}
+        className="max-h-8 max-w-8 object-contain"
+      />
+    </span>
+  );
+
+  if (!item.url) return badge;
+
+  return (
     <>
-      {item.logo ? (
-        // Ficha cuadrada comun: los isotipos van de 0.85:1 a 2:1 y uno trae
-        // fondo negro solido. Encuadrarlos en una caja clara los deja del
-        // mismo peso visual y contiene el bloque oscuro.
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-md border border-border bg-paper p-1.5">
-          <Image
-            src={item.logo.src}
-            alt=""
-            width={item.logo.width}
-            height={item.logo.height}
-            className="max-h-8 max-w-8 object-contain"
-          />
-        </span>
-      ) : null}
-      <span className="relative">
-        {item.institution}
-        {item.url ? <DottedUnderline /> : null}
-      </span>
+      {/* biome-ignore lint/a11y/useAnchorContent: sin texto a propósito. Duplica el enlace del nombre de al lado, que sí lo anuncia; con aria-hidden y tabIndex -1 queda clicable con el mouse sin obligar a pasar dos veces por el mismo destino. */}
+      <a
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={-1}
+        aria-hidden="true"
+        className="shrink-0"
+      >
+        {badge}
+      </a>
     </>
+  );
+}
+
+function InstitutionName({ item }: { item: EducationItem }) {
+  const name = (
+    <span className="relative">
+      {item.institution}
+      {item.url ? <DottedUnderline /> : null}
+    </span>
   );
 
   return (
-    <h3 className="text-primary text-base">
+    <h3 className="text-base text-primary">
       {item.url ? (
         <a
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center gap-3 transition-colors hover:text-brand"
+          className="group transition-colors hover:text-brand"
         >
-          {content}
+          {name}
         </a>
       ) : (
-        <span className="inline-flex items-center gap-3">{content}</span>
+        name
       )}
     </h3>
   );
@@ -88,17 +109,24 @@ export function Timeline() {
       <Section title={t("education")}>
         <ul className="flex flex-col gap-7">
           {education.map((item) => (
-            <li key={`${item.institution}-${item.period.start}`}>
-              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-                <InstitutionName item={item} />
-                <span className="font-mono text-foreground text-xs tracking-tight">
-                  {formatPeriod(item.period, present, locale)}
-                </span>
+            // El logo es hermano de todo el bloque de texto, no del título:
+            // así queda centrado contra el conjunto de nombre y carrera.
+            <li
+              key={`${item.institution}-${item.period.start}`}
+              className="flex items-center gap-3"
+            >
+              <InstitutionLogo item={item} />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <InstitutionName item={item} />
+                  <span className="font-mono text-foreground text-xs tracking-tight">
+                    {formatPeriod(item.period, present, locale)}
+                  </span>
+                </div>
+                <p className="mt-1 font-mono text-soft text-xs">
+                  {item.degree[locale]}
+                </p>
               </div>
-              {/* Alineado con el texto del encabezado, no con la ficha. */}
-              <p className="mt-1 pl-14 font-mono text-soft text-xs">
-                {item.degree[locale]}
-              </p>
             </li>
           ))}
         </ul>

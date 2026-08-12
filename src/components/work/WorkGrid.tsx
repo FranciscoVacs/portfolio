@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { RevealContent } from "@/components/ui/RevealContent";
 import type { Project } from "@/content/schema";
 import { WorkCard } from "./WorkCard";
 
@@ -10,10 +11,10 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
   }
 
   return (
-    <div className="mt-10 flex flex-col gap-6">
+    <RevealContent className="mt-10 flex flex-col gap-6">
       {projects.map((project) => (
         <WorkCard key={project.slug} project={project} />
       ))}
-    </div>
+    </RevealContent>
   );
 }
