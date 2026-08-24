@@ -60,7 +60,9 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    /* El script de abajo agrega la clase `js` antes de que React hidrate,
+       así que el DOM real nunca coincide con el árbol del server. */
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <script
           // biome-ignore lint/security/noDangerouslySetInnerHtml: habilita el revelado sólo si hay JS
