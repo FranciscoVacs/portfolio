@@ -29,6 +29,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+# Volcados de crash de msys/cygwin: se regeneran solos y no dicen nada del proyecto.
+*.stackdump
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -51,3 +53,7 @@ next-env.d.ts
 
 # superpowers (notas de trabajo locales)
 .superpowers/
+
+# artefactos de herramientas de agente (caché de review, registry de skills)
+.air/
+.atl/
