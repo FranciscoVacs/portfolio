@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { currentEn } from "./content";
 
 test("la home muestra el nombre y el titular", async ({ page }) => {
   await page.goto("/en");
@@ -18,10 +19,18 @@ test("la home lista experiencia y educación", async ({ page }) => {
     .locator("section")
     .filter({ has: page.getByRole("heading", { name: "Experience" }) });
   await expect(
-    experience.getByRole("heading", { name: "CUNUMI" }),
+    experience.getByRole("heading", {
+      name: currentEn?.experience[0]?.organization || "CUNUMI",
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Universidad Tecnológica Nacional" }),
+    page.getByRole("heading", {
+      name:
+        currentEn?.education[0]?.organization ||
+        "Universidad Tecnológica Nacional",
+      exact: true,
+    }),
   ).toBeVisible();
 });
 

@@ -2,9 +2,9 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { DottedUnderline } from "@/components/ui/DottedLink";
 import { Section } from "@/components/ui/Section";
-import { education } from "@/content/education";
-import { experience } from "@/content/experience";
-import type { EducationItem, Locale } from "@/content/schema";
+import { education as originalEducation } from "@/content/education";
+import { experience as originalExperience } from "@/content/experience";
+import type { EducationItem, ExperienceItem, Locale } from "@/content/schema";
 import { formatPeriod } from "@/lib/format";
 
 /**
@@ -78,7 +78,13 @@ function InstitutionName({ item }: { item: EducationItem }) {
   );
 }
 
-export function Timeline() {
+export function Timeline({
+  education = originalEducation,
+  experience = originalExperience,
+}: {
+  education?: EducationItem[];
+  experience?: ExperienceItem[];
+}) {
   const t = useTranslations("Home");
   const locale = useLocale() as Locale;
   const present = t("present");

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useLocale } from "next-intl";
-import { profile } from "@/content/profile";
-import type { Locale } from "@/content/schema";
+import { profile as originalProfile } from "@/content/profile";
+import type { Locale, Profile } from "@/content/schema";
 
-export function Hero() {
+export function Hero({ profile = originalProfile }: { profile?: Profile }) {
   const locale = useLocale() as Locale;
 
   return (

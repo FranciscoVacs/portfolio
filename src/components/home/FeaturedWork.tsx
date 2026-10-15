@@ -1,12 +1,18 @@
 import { useLocale, useTranslations } from "next-intl";
 import { DottedLocaleLink } from "@/components/ui/DottedLink";
 import { Section } from "@/components/ui/Section";
-import { projects } from "@/content/projects";
-import type { Locale } from "@/content/schema";
+import { projects as originalProjects } from "@/content/projects";
+import type { Locale, Project } from "@/content/schema";
 import { formatPeriod } from "@/lib/format";
 import { featuredProjects } from "@/lib/projects";
 
-export function FeaturedWork() {
+export function FeaturedWork({
+  projects = originalProjects,
+  workHref = "/work",
+}: {
+  projects?: Project[];
+  workHref?: string;
+}) {
   const t = useTranslations("Home");
   const locale = useLocale() as Locale;
   const featured = featuredProjects(projects);
@@ -30,7 +36,7 @@ export function FeaturedWork() {
           </li>
         ))}
       </ul>
-      <DottedLocaleLink href="/work" className="mt-6 inline-block text-sm">
+      <DottedLocaleLink href={workHref} className="mt-6 inline-block text-sm">
         {t("seeAllWork")}
       </DottedLocaleLink>
     </Section>

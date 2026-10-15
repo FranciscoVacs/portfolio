@@ -1,16 +1,28 @@
 import { expect, test } from "@playwright/test";
+import { currentEn } from "./content";
 
 test("Work lista todos los proyectos por defecto", async ({ page }) => {
   await page.goto("/en/work");
-  await expect(page.getByRole("heading", { name: "CUNUMI" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Bohemia" })).toBeVisible();
+  for (const name of currentEn
+    ? currentEn.projects.map((p) => p.organization)
+    : ["CUNUMI", "Bohemia"])
+    await expect(
+      page.getByRole("heading", { name, exact: true }),
+    ).toBeVisible();
 });
 
-test("el filtro de contratos deja solo CUNUMI", async ({ page }) => {
+test("el filtro de contratos muestra los contratos o su estado vacío", async ({
+  page,
+}) => {
   await page.goto("/en/work");
   await page.getByRole("link", { name: "Contract", exact: true }).click();
   await expect(page).toHaveURL("/en/work?type=contract");
-  await expect(page.getByRole("heading", { name: "CUNUMI" })).toBeVisible();
+  if (currentEn)
+    await expect(
+      page.getByText("No projects in this category yet."),
+    ).toBeVisible();
+  else
+    await expect(page.getByRole("heading", { name: "CUNUMI" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Bohemia" })).toHaveCount(0);
 });
 
@@ -25,13 +37,17 @@ test("solo quedan las dos categorías reales", async ({ page }) => {
 
 test("un filtro inválido cae en todos", async ({ page }) => {
   await page.goto("/en/work?type=freelance");
-  await expect(page.getByRole("heading", { name: "CUNUMI" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Bohemia" })).toBeVisible();
+  for (const name of currentEn
+    ? currentEn.projects.map((p) => p.organization)
+    : ["CUNUMI", "Bohemia"])
+    await expect(
+      page.getByRole("heading", { name, exact: true }),
+    ).toBeVisible();
 });
 
 test("las tarjetas muestran el stack y los links", async ({ page }) => {
   await page.goto("/en/work");
-  await expect(page.getByText("React Native", { exact: true })).toBeVisible();
+  await expect(page.getByText("Angular", { exact: true })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Live demo" }).first(),
   ).toBeVisible();
@@ -39,12 +55,12 @@ test("las tarjetas muestran el stack y los links", async ({ page }) => {
 
 test("cada tecnología del stack lleva su logo", async ({ page }) => {
   await page.goto("/en/work");
-  // El badge de React Native es el <li> que contiene ese texto exacto; el
+  // El badge de Angular es el <li> que contiene ese texto exacto; el
   // svg tiene que estar adentro y pintado con el color de marca, no heredar
   // el color del texto.
   const badge = page
     .getByRole("listitem")
-    .filter({ hasText: /^React Native$/ })
+    .filter({ hasText: /^Angular$/ })
     .first();
   await expect(badge.locator("svg")).toHaveAttribute("fill", /^#[0-9A-F]{6}$/i);
 });
@@ -75,7 +91,7 @@ test("todas las miniaturas tienen la misma caja", async ({ page }) => {
   await page.goto("/en/work");
   const images = page.getByRole("article").locator("img");
   const count = await images.count();
-  expect(count).toBeGreaterThan(1);
+  expect(count).toBeGreaterThanOrEqual(1);
 
   const boxes = [];
   for (let i = 0; i < count; i++) {

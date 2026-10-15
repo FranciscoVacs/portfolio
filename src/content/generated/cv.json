@@ -1,0 +1,329 @@
+{
+  "schema": "gestion-cv-public-v1",
+  "defaultProfile": "desarrollo",
+  "profiles": [
+    {
+      "id": "desarrollo",
+      "name": "Desarrollador",
+      "digest": "fecffebfdb441e369472d296f1aa78efbd6f5aa24ed9981882b5e7d9c535b030",
+      "translation": "ready",
+      "locales": {
+        "es": {
+          "name": "Francisco Vacs",
+          "email": "franciscovacs@gmail.com",
+          "links": [
+            {
+              "label": "LinkedIn",
+              "url": "https://www.linkedin.com/in/francisco-vacs"
+            },
+            {
+              "label": "GitHub",
+              "url": "https://github.com/FranciscoVacs"
+            }
+          ],
+          "summary": "Estudiante del último año de Ingeniería en Sistemas, con experiencia en desarrollo web y móvil, liderazgo de equipos técnicos y soporte informático en entornos Linux, redes e infraestructura. Orientado al desarrollo de soluciones escalables y mantenibles, con especial entusiasmo por la integración de inteligencia artificial en la ingeniería de software. Me mantengo actualizado sobre los avances en IA y su aplicación para mejorar los procesos de desarrollo. Además, soy realizador audiovisual y apasionado por crear cine.",
+          "experience": [
+            {
+              "id": "municipalidad-rosario",
+              "organization": "Municipalidad de Rosario | Secretaría de Salud Pública",
+              "role": "Pasante de Soporte IT e Infraestructura Informática",
+              "location": "Rosario, Argentina",
+              "start": "2026-10",
+              "end": null,
+              "description": "Brindo soporte técnico y resuelvo incidentes en entornos Linux. Configuro y mantengo redes informáticas. Instalo, configuro y mantengo sistemas operativos y aplicaciones. Realizo mantenimiento preventivo y correctivo de equipos informáticos.",
+              "skills": [
+                "Bash"
+              ]
+            },
+            {
+              "id": "cunumi",
+              "organization": "Cunumi APP",
+              "role": "Director de Desarrollo de Software (Contrato Independiente)",
+              "location": "Rosario, Argentina",
+              "start": "2026-05",
+              "end": null,
+              "description": "Dirijo el desarrollo de una plataforma web y móvil utilizando React, TanStack, Capacitor, PostgreSQL y Supabase. Coordino un equipo de dos desarrolladores, planifico y asigno tareas aplicando prácticas ágiles de Scrum y desarrollo guiado por especificaciones (SDD). Integro inteligencia artificial en el proceso de desarrollo de software utilizando agentes de IA. Diseño la arquitectura del sistema y superviso la calidad del software mediante revisiones de código y solicitudes de incorporación de cambios en GitHub.",
+              "skills": [
+                "React",
+                "TanStack",
+                "Capacitor",
+                "PostgreSQL",
+                "Supabase",
+                "Metodologías ágiles",
+                "SDD",
+                "Agentes de IA",
+                "Git / GitHub",
+                "Gestión de proyectos",
+                "Liderazgo"
+              ]
+            },
+            {
+              "id": "profitwell",
+              "organization": "Profitwell",
+              "role": "Desarrollador Python - Pasantía técnica",
+              "location": "Rosario, Argentina",
+              "start": "2021-08",
+              "end": "2021-11",
+              "description": "Desarrollé herramientas de automatización integrando APIs y bases de datos. Trabajé colaborativamente bajo Metodologías Ágiles (Scrum). Gestioné código y control de versiones mediante Git y GitHub.",
+              "skills": [
+                "Python",
+                "Git / GitHub",
+                "Metodologías ágiles"
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": "plataforma-entradas",
+              "organization": "Plataforma de Venta de Entradas",
+              "role": "Desarrollador Full-Stack",
+              "location": "Rosario, Argentina",
+              "start": "2024-07",
+              "end": "2025-02",
+              "description": "Frontend: Diseñé y construí una plataforma integral de gestión de eventos utilizando Angular y Tailwind CSS. Backend: Desarrollé una API RESTful robusta para la gestión de usuarios (Auth), eventos y galerías, implementando persistencia de datos. Lógica de negocio: Implementé algoritmos para la generación dinámica de entradas, la automatización de envíos por email y la integración con pasarela de pagos.",
+              "skills": [
+                "Angular",
+                "APIs REST"
+              ]
+            }
+          ],
+          "education": [
+            {
+              "id": "utn",
+              "organization": "UNIVERSIDAD TECNOLÓGICA NACIONAL",
+              "role": "Ingeniería en Sistemas de la Información - En curso, 5to año",
+              "location": "Rosario, Argentina",
+              "start": "2022-03",
+              "end": null,
+              "description": "",
+              "skills": []
+            },
+            {
+              "id": "epctv",
+              "organization": "ESCUELA PROVINCIAL DE CINE Y TELEVISIÓN",
+              "role": "Técnico en Realización Audiovisual",
+              "location": "Rosario, Argentina",
+              "start": "2022-03",
+              "end": "2025-12",
+              "description": "",
+              "skills": []
+            },
+            {
+              "id": "politecnico",
+              "organization": "INSTITUTO POLITECNICO SUPERIOR GENERAL SAN MARTIN",
+              "role": "Técnico en Informática Profesional y Personal",
+              "location": "Rosario, Argentina",
+              "start": "2016-03",
+              "end": "2021-12",
+              "description": "",
+              "skills": []
+            }
+          ],
+          "courses": [],
+          "skills": {
+            "technical": [
+              "Node.js",
+              "TypeScript",
+              "Angular",
+              "React",
+              "React Native",
+              "Expo",
+              "Supabase",
+              "PostgreSQL",
+              "Python",
+              "Capacitor",
+              "Bash",
+              "TanStack"
+            ],
+            "tools": [
+              "Git / GitHub",
+              "APIs REST",
+              "Metodologías ágiles",
+              "SDD",
+              "Agentes de IA"
+            ],
+            "additional": [
+              "Trabajo en equipo",
+              "Resolución analítica de problemas",
+              "Comunicación efectiva",
+              "Proactividad",
+              "Gestión de proyectos",
+              "Liderazgo"
+            ]
+          },
+          "languages": [
+            {
+              "name": "Inglés",
+              "level": "Avanzado (Cambridge First Certificate - B2)"
+            },
+            {
+              "name": "Español",
+              "level": "Nativo"
+            }
+          ],
+          "pdf": {
+            "classic": "/cv/gestion/desarrollo-fecffebfdb441e369472-es.pdf"
+          }
+        },
+        "en": {
+          "name": "Francisco Vacs",
+          "email": "franciscovacs@gmail.com",
+          "links": [
+            {
+              "label": "LinkedIn",
+              "url": "https://www.linkedin.com/in/francisco-vacs"
+            },
+            {
+              "label": "GitHub",
+              "url": "https://github.com/FranciscoVacs"
+            }
+          ],
+          "summary": "Final-year Information Systems Engineering student with experience in web and mobile development, technical team leadership, and IT support across Linux environments, networks, and infrastructure. Focused on building scalable, maintainable solutions, with a particular interest in integrating artificial intelligence into software engineering. I keep up to date with advances in AI and their application to improving development processes. I am also an audiovisual producer with a passion for filmmaking.",
+          "experience": [
+            {
+              "id": "municipalidad-rosario",
+              "organization": "Municipality of Rosario | Secretariat of Public Health",
+              "role": "IT Support and Infrastructure Intern",
+              "location": "Rosario, Argentina",
+              "start": "2026-10",
+              "end": null,
+              "description": "Provide technical support and resolve incidents in Linux environments. Configure and maintain computer networks. Install, configure, and maintain operating systems and applications. Perform preventive and corrective maintenance on computer equipment.",
+              "skills": [
+                "Bash"
+              ]
+            },
+            {
+              "id": "cunumi",
+              "organization": "Cunumi APP",
+              "role": "Software Development Lead (Independent Contract)",
+              "location": "Rosario, Argentina",
+              "start": "2026-05",
+              "end": null,
+              "description": "Lead the development of a web and mobile platform using React, TanStack, Capacitor, PostgreSQL, and Supabase. Coordinate a team of two developers, planning and assigning tasks using Scrum practices and specification-driven development (SDD). Integrate artificial intelligence into the software development process using AI agents. Design the system architecture and oversee software quality through code reviews and pull requests on GitHub.",
+              "skills": [
+                "React",
+                "TanStack",
+                "Capacitor",
+                "PostgreSQL",
+                "Supabase",
+                "Agile methodologies",
+                "SDD",
+                "AI agents",
+                "Git / GitHub",
+                "Project management",
+                "Leadership"
+              ]
+            },
+            {
+              "id": "profitwell",
+              "organization": "Profitwell",
+              "role": "Python Developer - Technical Internship",
+              "location": "Rosario, Argentina",
+              "start": "2021-08",
+              "end": "2021-11",
+              "description": "Developed automation tools by integrating APIs and databases. Collaborated using Agile methodologies (Scrum). Managed source code and version control using Git and GitHub.",
+              "skills": [
+                "Python",
+                "Git / GitHub",
+                "Agile methodologies"
+              ]
+            }
+          ],
+          "projects": [
+            {
+              "id": "plataforma-entradas",
+              "organization": "Ticketing Platform",
+              "role": "Full-Stack Developer",
+              "location": "Rosario, Argentina",
+              "start": "2024-07",
+              "end": "2025-02",
+              "description": "Frontend: Designed and built a comprehensive event management platform using Angular and Tailwind CSS. Backend: Developed a robust RESTful API for user authentication, event management, and galleries, implementing data persistence. Business logic: Implemented algorithms for dynamic ticket generation, automated email delivery, and payment gateway integration.",
+              "skills": [
+                "Angular",
+                "REST APIs"
+              ]
+            }
+          ],
+          "education": [
+            {
+              "id": "utn",
+              "organization": "UNIVERSIDAD TECNOLÓGICA NACIONAL",
+              "role": "Information Systems Engineering - In progress, 5th year",
+              "location": "Rosario, Argentina",
+              "start": "2022-03",
+              "end": null,
+              "description": "",
+              "skills": []
+            },
+            {
+              "id": "epctv",
+              "organization": "ESCUELA PROVINCIAL DE CINE Y TELEVISIÓN",
+              "role": "Audiovisual Production Technician",
+              "location": "Rosario, Argentina",
+              "start": "2022-03",
+              "end": "2025-12",
+              "description": "",
+              "skills": []
+            },
+            {
+              "id": "politecnico",
+              "organization": "INSTITUTO POLITECNICO SUPERIOR GENERAL SAN MARTIN",
+              "role": "Computer Systems Technician",
+              "location": "Rosario, Argentina",
+              "start": "2016-03",
+              "end": "2021-12",
+              "description": "",
+              "skills": []
+            }
+          ],
+          "courses": [],
+          "skills": {
+            "technical": [
+              "Node.js",
+              "TypeScript",
+              "Angular",
+              "React",
+              "React Native",
+              "Expo",
+              "Supabase",
+              "PostgreSQL",
+              "Python",
+              "Capacitor",
+              "Bash",
+              "TanStack"
+            ],
+            "tools": [
+              "Git / GitHub",
+              "REST APIs",
+              "Agile methodologies",
+              "SDD",
+              "AI agents"
+            ],
+            "additional": [
+              "Teamwork",
+              "Analytical problem solving",
+              "Effective communication",
+              "Proactivity",
+              "Project management",
+              "Leadership"
+            ]
+          },
+          "languages": [
+            {
+              "name": "English",
+              "level": "Advanced (Cambridge First Certificate - B2)"
+            },
+            {
+              "name": "Spanish",
+              "level": "Native"
+            }
+          ],
+          "pdf": {
+            "classic": "/cv/gestion/desarrollo-fecffebfdb441e369472-en.pdf",
+            "europass": "/cv/gestion/desarrollo-fecffebfdb441e369472-europass.pdf"
+          }
+        }
+      }
+    }
+  ]
+}

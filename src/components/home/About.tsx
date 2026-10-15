@@ -1,9 +1,9 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Section } from "@/components/ui/Section";
-import { profile } from "@/content/profile";
-import type { Locale } from "@/content/schema";
+import { profile as originalProfile } from "@/content/profile";
+import type { Locale, Profile } from "@/content/schema";
 
-export function About() {
+export function About({ profile = originalProfile }: { profile?: Profile }) {
   const t = useTranslations("Home");
   const locale = useLocale() as Locale;
 

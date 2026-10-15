@@ -5,11 +5,17 @@ import { Link, usePathname } from "@/i18n/navigation";
 
 export function NavLink({ href, label }: { href: string; label: string }) {
   const pathname = usePathname();
-  const active = href === "/" ? pathname === href : pathname.startsWith(href);
+  const scope = pathname.match(/^\/perfil\/[^/]+/)?.[0];
+  const destination =
+    scope && ["/", "/work", "/cv"].includes(href)
+      ? scope + (href === "/" ? "" : href)
+      : href;
+  const active =
+    href === "/" ? pathname === destination : pathname.startsWith(destination);
 
   return (
     <Link
-      href={href}
+      href={destination}
       aria-current={active ? "page" : undefined}
       className={
         active

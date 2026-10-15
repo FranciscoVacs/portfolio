@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { connected } from "./content";
 
 test("CV ofrece la descarga del PDF", async ({ page }) => {
   await page.goto("/en/cv");
@@ -8,7 +9,7 @@ test("CV ofrece la descarga del PDF", async ({ page }) => {
   });
   await expect(download).toHaveAttribute(
     "href",
-    "/cv/francisco-vacs-cv-en.pdf",
+    connected?.locales.en?.pdf.classic || "/cv/francisco-vacs-cv-en.pdf",
   );
 });
 
@@ -18,7 +19,10 @@ test("cada idioma sirve su propio PDF", async ({ page }) => {
   await page.goto("/es/cv");
   await expect(
     page.getByRole("link", { name: "Descargar PDF", exact: true }),
-  ).toHaveAttribute("href", "/cv/francisco-vacs-cv-es.pdf");
+  ).toHaveAttribute(
+    "href",
+    connected?.locales.es.pdf.classic || "/cv/francisco-vacs-cv-es.pdf",
+  );
 });
 
 test("los dos PDFs se sirven correctamente", async ({ request }) => {

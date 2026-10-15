@@ -5,7 +5,13 @@ import type { WorkFilter } from "@/lib/projects";
 
 const FILTERS: WorkFilter[] = ["all", "personal", "contract"];
 
-export function WorkFilters({ active }: { active: WorkFilter }) {
+export function WorkFilters({
+  active,
+  path = "/work",
+}: {
+  active: WorkFilter;
+  path?: string;
+}) {
   const t = useTranslations("Work");
 
   return (
@@ -18,8 +24,8 @@ export function WorkFilters({ active }: { active: WorkFilter }) {
           key={filter}
           href={
             filter === "all"
-              ? "/work"
-              : { pathname: "/work", query: { type: filter } }
+              ? path
+              : { pathname: path, query: { type: filter } }
           }
           className={
             filter === active

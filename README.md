@@ -40,3 +40,5 @@ Si un dato está mal, el build falla indicando el archivo y el índice.
 
 Los textos de interfaz (botones, títulos de sección) están en `messages/en.json`
 y `messages/es.json`.
+
+También se puede actualizar desde [GestionCV](docs/gestion-cv.md): los perfiles conectados se leen de `src/content/generated/cv.json` y sus PDFs se sirven desde `public/cv/gestion/`. Se conserva el mismo diseño en las vistas de cada perfil, con rutas en español e inglés. Subir la instantánea a `main` activa el despliegue de producción en Vercel.
