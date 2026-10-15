@@ -80,6 +80,7 @@ export const experienceSchema = z.object({
 });
 
 export const educationSchema = z.object({
+  story: localizedString.optional(),
   institution: z.string().min(1),
   degree: localizedString,
   location: z.string().min(1),
@@ -101,6 +102,7 @@ export const educationSchema = z.object({
 });
 
 export const profileSchema = z.object({
+  links: z.array(z.object({ label: z.string(), url: z.url() })).optional(),
   name: z.string().min(1),
   headline: localizedString,
   bio: localizedString,

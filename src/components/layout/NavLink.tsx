@@ -7,7 +7,7 @@ export function NavLink({ href, label }: { href: string; label: string }) {
   const pathname = usePathname();
   const scope = pathname.match(/^\/perfil\/[^/]+/)?.[0];
   const destination =
-    scope && ["/", "/work", "/cv"].includes(href)
+    scope && ["/", "/work", "/cv", "/fav"].includes(href)
       ? scope + (href === "/" ? "" : href)
       : href;
   const active =

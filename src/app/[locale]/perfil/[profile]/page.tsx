@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PortfolioHome } from "@/components/portfolio/Home";
+import type { Locale } from "@/content/schema";
 import { cvCatalog } from "@/lib/cv-bridge";
 import { alternatesFor } from "@/lib/site";
 
@@ -13,7 +14,10 @@ export async function generateMetadata({
   const entry = cvCatalog.profiles.find((p) => p.id === profile);
   if (!entry) notFound();
   return {
-    title: entry.name,
+    title: entry.locales[locale as Locale]?.site?.seoTitle || entry.name,
+    description:
+      entry.locales[locale as Locale]?.site?.seoDescription ||
+      entry.locales[locale as Locale]?.summary,
     alternates: alternatesFor(locale, `/perfil/${profile}`),
   };
 }

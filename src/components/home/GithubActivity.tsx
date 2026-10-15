@@ -20,8 +20,14 @@ function usernameFrom(githubUrl: string): string | null {
   return username || null;
 }
 
-export async function GithubActivity() {
-  const username = usernameFrom(profile.github);
+export async function GithubActivity({
+  githubUrl = profile.github,
+  username: configured,
+}: {
+  githubUrl?: string;
+  username?: string;
+} = {}) {
+  const username = configured || (githubUrl ? usernameFrom(githubUrl) : null);
   if (!username) return null;
 
   const calendar = await fetchContributions(username);

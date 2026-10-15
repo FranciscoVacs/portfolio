@@ -81,9 +81,13 @@ function InstitutionName({ item }: { item: EducationItem }) {
 export function Timeline({
   education = originalEducation,
   experience = originalExperience,
+  showExperience = true,
+  showEducation = true,
 }: {
   education?: EducationItem[];
   experience?: ExperienceItem[];
+  showExperience?: boolean;
+  showEducation?: boolean;
 }) {
   const t = useTranslations("Home");
   const locale = useLocale() as Locale;
@@ -91,52 +95,61 @@ export function Timeline({
 
   return (
     <>
-      <Section title={t("experience")}>
-        <ul className="flex flex-col gap-8">
-          {experience.map((item) => (
-            <li key={`${item.company}-${item.period.start}`}>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-base text-primary">{item.company}</h3>
-                <span className="font-mono text-foreground text-xs tracking-tight">
-                  {formatPeriod(item.period, present, locale)}
-                </span>
-              </div>
-              <p className="mt-0.5 font-mono text-soft text-xs">
-                {item.role[locale]}
-              </p>
-              <p className="mt-3 text-foreground text-sm leading-relaxed">
-                {item.story[locale]}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section title={t("education")}>
-        <ul className="flex flex-col gap-7">
-          {education.map((item) => (
-            // El logo es hermano de todo el bloque de texto, no del título:
-            // así queda centrado contra el conjunto de nombre y carrera.
-            <li
-              key={`${item.institution}-${item.period.start}`}
-              className="flex items-center gap-3"
-            >
-              <InstitutionLogo item={item} />
-              <div className="min-w-0 flex-1">
+      {showExperience ? (
+        <Section title={t("experience")}>
+          <ul className="flex flex-col gap-8">
+            {experience.map((item) => (
+              <li key={`${item.company}-${item.period.start}`}>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <InstitutionName item={item} />
+                  <h3 className="text-base text-primary">{item.company}</h3>
                   <span className="font-mono text-foreground text-xs tracking-tight">
                     {formatPeriod(item.period, present, locale)}
                   </span>
                 </div>
-                <p className="mt-1 font-mono text-soft text-xs">
-                  {item.degree[locale]}
+                <p className="mt-0.5 font-mono text-soft text-xs">
+                  {item.role[locale]}
                 </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </Section>
+                <p className="mt-3 text-foreground text-sm leading-relaxed">
+                  {item.story[locale]}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
+      {showEducation ? (
+        <Section title={t("education")}>
+          <ul className="flex flex-col gap-7">
+            {education.map((item) => (
+              // El logo es hermano de todo el bloque de texto, no del título:
+              // así queda centrado contra el conjunto de nombre y carrera.
+              <li
+                key={`${item.institution}-${item.period.start}`}
+                className="flex items-center gap-3"
+              >
+                <InstitutionLogo item={item} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <InstitutionName item={item} />
+                    <span className="font-mono text-foreground text-xs tracking-tight">
+                      {formatPeriod(item.period, present, locale)}
+                    </span>
+                  </div>
+                  <p className="mt-1 font-mono text-soft text-xs">
+                    {item.degree[locale]}
+                  </p>
+                  {item.story?.[locale] ? (
+                    <p className="mt-3 text-foreground text-sm leading-relaxed">
+                      {item.story[locale]}
+                    </p>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
     </>
   );
 }

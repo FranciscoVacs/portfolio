@@ -9,13 +9,17 @@ import { featuredProjects } from "@/lib/projects";
 export function FeaturedWork({
   projects = originalProjects,
   workHref = "/work",
+  keepOrder = false,
 }: {
   projects?: Project[];
   workHref?: string;
+  keepOrder?: boolean;
 }) {
   const t = useTranslations("Home");
   const locale = useLocale() as Locale;
-  const featured = featuredProjects(projects);
+  const featured = keepOrder
+    ? projects.filter((p) => p.featured)
+    : featuredProjects(projects);
 
   return (
     <Section title={t("featuredWork")}>

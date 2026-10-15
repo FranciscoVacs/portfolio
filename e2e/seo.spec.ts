@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { profileCount } from "./content";
 
 test("una ruta inexistente muestra el 404 traducido", async ({ page }) => {
   const response = await page.goto("/en/no-existe");
@@ -21,13 +22,13 @@ test("cada locale declara su alternativa", async ({ page }) => {
   await expect(page.locator('link[hreflang="en"]')).toHaveCount(1);
 });
 
-test("el sitemap lista las ocho rutas de ambos locales", async ({
+test("el sitemap lista las rutas generales y las de los perfiles", async ({
   request,
 }) => {
   const response = await request.get("/sitemap.xml");
   expect(response.status()).toBe(200);
   const body = await response.text();
-  expect(body.match(/<loc>/g)).toHaveLength(8);
+  expect(body.match(/<loc>/g)).toHaveLength(8 + profileCount * 8);
   for (const path of [
     "/en",
     "/es",

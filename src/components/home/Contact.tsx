@@ -9,6 +9,12 @@ export function Contact({ profile = originalProfile }: { profile?: Profile }) {
   const t = useTranslations("Home");
 
   const links = [
+    ...(profile.links || []).map((l) => ({
+      href: l.url,
+      label: l.label,
+      icon: "",
+      external: true,
+    })),
     {
       href: `mailto:${profile.email}`,
       label: profile.email,

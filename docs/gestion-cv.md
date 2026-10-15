@@ -15,3 +15,10 @@ Los logos de instituciones y las imágenes/enlaces de proyectos se preservan med
 Para vista local: `pnpm dev --port 4181 --hostname 127.0.0.1`. El guardado en el gestor actualiza el contenido local; actualizar el sitio en internet requiere reconstruir y desplegar esta instantánea. La conexión actual no hace commits, pushes ni despliegues automáticos.
 
 Validación: `pnpm typecheck`, `pnpm lint`, `pnpm test` y `PORTFOLIO_TEST_URL=http://127.0.0.1:4181 pnpm test:e2e`. En PowerShell asignar primero `$env:PORTFOLIO_TEST_URL`. Los tests de navegador usan Chrome instalado y no inician otro servidor cuando se proporciona esa URL.
+
+
+## Contenido propio administrado
+
+El catálogo público incluye `site` por idioma: presentación, visibilidad, extensiones de trayectoria, casos de trabajo vinculados o exclusivos, imágenes, enlaces, favoritos y metadatos SEO. `site: null` indica que los textos propios esperan traducción; no invalida por sí solo el PDF del CV. El editor privado guarda y valida estos datos antes de proyectarlos aquí.
+
+Los favoritos también tienen rutas `/[locale]/perfil/[profile]/fav`. Los enlaces históricos a PDFs resuelven mediante `/api/cv/[format]` la instantánea vigente, sin almacenar una redirección permanente. Publicar desde GestionCV valida el proyecto y sube el catálogo, las imágenes administradas y los PDFs a main, activando Vercel. El administrador sigue siendo local.

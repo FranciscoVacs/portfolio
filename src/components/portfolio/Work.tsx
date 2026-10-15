@@ -20,12 +20,18 @@ export async function PortfolioWork({
   const locale = (await getLocale()) as Locale;
   const { entry, content } = resolveCv(locale, profileId);
   if (profileId && !entry) notFound();
-  if (entry && !content) return <TranslationPending id={entry.id} />;
+  if (entry && (!content || content.site === null))
+    return <TranslationPending id={entry.id} />;
   const { projects } = portfolioBundle(content);
   const t = await getTranslations("Work");
 
   const filter = parseWorkFilter(type);
-  const visible = sortByRecency(filterProjects(projects, filter));
+  const visible =
+    content?.site?.sections.projects === false
+      ? []
+      : content?.site
+        ? filterProjects(projects, filter)
+        : sortByRecency(filterProjects(projects, filter));
 
   return (
     <Container>

@@ -163,6 +163,160 @@
           ],
           "pdf": {
             "classic": "/cv/gestion/desarrollo-fecffebfdb441e369472-es.pdf"
+          },
+          "site": {
+            "avatar": "/avatar.png",
+            "headline": "Desarrollador full-stack · Estudiante de Ingeniería en Sistemas de Información",
+            "location": "Rosario, Argentina",
+            "bio": "",
+            "whatsapp": "",
+            "githubUsername": "",
+            "seoTitle": "",
+            "seoDescription": "",
+            "sections": {
+              "about": true,
+              "skills": true,
+              "experience": true,
+              "education": true,
+              "projects": true,
+              "courses": true,
+              "languages": true,
+              "github": true,
+              "contact": true,
+              "favorites": true
+            },
+            "records": [
+              {
+                "key": "education:utn",
+                "visible": true,
+                "description": "",
+                "url": "https://www.frro.utn.edu.ar/",
+                "logo": {
+                  "src": "/education/utn.png",
+                  "alt": "",
+                  "width": 920,
+                  "height": 1081
+                }
+              },
+              {
+                "key": "education:epctv",
+                "visible": true,
+                "description": "",
+                "url": "https://epctv.edu.ar/",
+                "logo": {
+                  "src": "/education/epctv.png",
+                  "alt": "",
+                  "width": 1191,
+                  "height": 582
+                }
+              },
+              {
+                "key": "education:politecnico",
+                "visible": true,
+                "description": "",
+                "url": "https://www.ips.edu.ar/",
+                "logo": {
+                  "src": "/education/ips.png",
+                  "alt": "",
+                  "width": 1000,
+                  "height": 1000
+                }
+              }
+            ],
+            "projects": [
+              {
+                "id": "cunumi",
+                "source": "experience:cunumi",
+                "visible": true,
+                "featured": true,
+                "category": "contract",
+                "title": "CUNUMI",
+                "summary": "Plataforma de gestión de mascotas, gestión de negocios y red social, publicada como PWA y como app React Native.",
+                "story": "El modelo de datos vino primero: un esquema PostgreSQL sobre Supabase que tenía que sostener mascotas, negocios aliados y un feed social sin convertirse en tres productos distintos. El backend arrancó en Firebase y lo migré entero a Supabase. La app se publicó como PWA hasta que eso dejó de alcanzar, y ahí pasó a ser una app React Native con Expo.",
+                "start": "",
+                "end": "",
+                "stack": [],
+                "links": {
+                  "live": "https://cunumi.app/welcome",
+                  "repo": "",
+                  "store": ""
+                },
+                "image": {
+                  "src": "/work/cunumi.png",
+                  "alt": "Tres pantallas de CUNUMI: explorador de comunidades, mapa de negocios aliados y el perfil de una mascota.",
+                  "width": 1920,
+                  "height": 1440
+                }
+              },
+              {
+                "id": "plataforma-entradas",
+                "source": "projects:plataforma-entradas",
+                "visible": true,
+                "featured": true,
+                "category": "personal",
+                "title": "Bohemia",
+                "summary": "Plataforma de gestión de eventos y venta de entradas, con generación dinámica de tickets, envío automático de mails e integración con pasarela de pago.",
+                "story": "Una plataforma de entradas para un lugar que existe, así que lo interesante nunca fue la interfaz: los tickets se generan al vuelo, los mails salen solos y hay plata pasando por una pasarela de pago. Construí el frontend en Angular y la API REST detrás, con autenticación, eventos y galerías.",
+                "start": "",
+                "end": "",
+                "stack": [],
+                "links": {
+                  "live": "https://www.bohemia-socialclub.me",
+                  "repo": "",
+                  "store": ""
+                },
+                "image": {
+                  "src": "/work/bohemia.png",
+                  "alt": "Portada de Bohemia con el próximo evento: fecha, dirección, lineup y el botón de compra de entradas.",
+                  "width": 2068,
+                  "height": 1077
+                }
+              }
+            ],
+            "favorites": [
+              {
+                "name": "Fireship",
+                "url": "https://www.youtube.com/@Fireship",
+                "category": "youtube",
+                "note": "Videos cortos y densos que te ponen al día con una herramienta nueva en pocos minutos.",
+                "id": "favorite-0"
+              },
+              {
+                "name": "Theo - t3.gg",
+                "url": "https://www.youtube.com/@t3dotgg",
+                "category": "youtube",
+                "note": "Opiniones fuertes sobre el ecosistema TypeScript y React, útiles para ver hacia dónde va el tooling.",
+                "id": "favorite-1"
+              },
+              {
+                "name": "Josh W. Comeau",
+                "url": "https://www.joshwcomeau.com",
+                "category": "blogs",
+                "note": "Las explicaciones más claras de layout en CSS e internals de React que encontré, con ejemplos interactivos.",
+                "id": "favorite-2"
+              },
+              {
+                "name": "MDN Web Docs",
+                "url": "https://developer.mozilla.org",
+                "category": "learning",
+                "note": "La referencia en la que realmente confío para cualquier cosa de la plataforma web.",
+                "id": "favorite-3"
+              },
+              {
+                "name": "Drizzle ORM",
+                "url": "https://orm.drizzle.team",
+                "category": "tools",
+                "note": "El ORM que uso en proyectos TypeScript: pensado desde SQL, tipado de punta a punta y sin magia escondida.",
+                "id": "favorite-4"
+              },
+              {
+                "name": "Excalidraw",
+                "url": "https://excalidraw.com",
+                "category": "tools",
+                "note": "La forma más rápida de bocetar una arquitectura antes de escribir código.",
+                "id": "favorite-5"
+              }
+            ]
           }
         },
         "en": {
@@ -321,9 +475,164 @@
           "pdf": {
             "classic": "/cv/gestion/desarrollo-fecffebfdb441e369472-en.pdf",
             "europass": "/cv/gestion/desarrollo-fecffebfdb441e369472-europass.pdf"
+          },
+          "site": {
+            "avatar": "/avatar.png",
+            "headline": "Full-stack developer · Information Systems Engineering student",
+            "location": "Rosario, Argentina",
+            "bio": "",
+            "whatsapp": "",
+            "githubUsername": "",
+            "seoTitle": "",
+            "seoDescription": "",
+            "sections": {
+              "about": true,
+              "skills": true,
+              "experience": true,
+              "education": true,
+              "projects": true,
+              "courses": true,
+              "languages": true,
+              "github": true,
+              "contact": true,
+              "favorites": true
+            },
+            "records": [
+              {
+                "key": "education:utn",
+                "visible": true,
+                "description": "",
+                "url": "https://www.frro.utn.edu.ar/",
+                "logo": {
+                  "src": "/education/utn.png",
+                  "alt": "",
+                  "width": 920,
+                  "height": 1081
+                }
+              },
+              {
+                "key": "education:epctv",
+                "visible": true,
+                "description": "",
+                "url": "https://epctv.edu.ar/",
+                "logo": {
+                  "src": "/education/epctv.png",
+                  "alt": "",
+                  "width": 1191,
+                  "height": 582
+                }
+              },
+              {
+                "key": "education:politecnico",
+                "visible": true,
+                "description": "",
+                "url": "https://www.ips.edu.ar/",
+                "logo": {
+                  "src": "/education/ips.png",
+                  "alt": "",
+                  "width": 1000,
+                  "height": 1000
+                }
+              }
+            ],
+            "projects": [
+              {
+                "id": "cunumi",
+                "source": "experience:cunumi",
+                "visible": true,
+                "featured": true,
+                "category": "contract",
+                "title": "CUNUMI",
+                "summary": "Pet management, business management and social networking platform, shipped as a PWA and as a React Native app.",
+                "story": "The data model came first: a PostgreSQL schema on Supabase that had to hold pets, allied businesses and a social feed without turning into three separate products. The backend started on Firebase and I moved all of it to Supabase. The app shipped as a PWA until that stopped being enough, and then became a React Native app with Expo.",
+                "start": "",
+                "end": "",
+                "stack": [],
+                "links": {
+                  "live": "https://cunumi.app/welcome",
+                  "repo": "",
+                  "store": ""
+                },
+                "image": {
+                  "src": "/work/cunumi.png",
+                  "alt": "Three phone screens from CUNUMI: community browser, allied businesses map and a pet profile.",
+                  "width": 1920,
+                  "height": 1440
+                }
+              },
+              {
+                "id": "plataforma-entradas",
+                "source": "projects:plataforma-entradas",
+                "visible": true,
+                "featured": true,
+                "category": "personal",
+                "title": "Bohemia",
+                "summary": "Event management and ticketing platform with dynamic ticket generation, automated email delivery and payment gateway integration.",
+                "story": "A ticketing platform for a real venue, which meant the interesting part was never the interface: tickets are generated on the fly, mail goes out on its own and money changes hands through a payment gateway. I built the Angular frontend and the REST API behind it, covering authentication, events and galleries.",
+                "start": "",
+                "end": "",
+                "stack": [],
+                "links": {
+                  "live": "https://www.bohemia-socialclub.me",
+                  "repo": "",
+                  "store": ""
+                },
+                "image": {
+                  "src": "/work/bohemia.png",
+                  "alt": "Bohemia home page showing the next event with its date, venue, lineup and ticket purchase button.",
+                  "width": 2068,
+                  "height": 1077
+                }
+              }
+            ],
+            "favorites": [
+              {
+                "name": "Fireship",
+                "url": "https://www.youtube.com/@Fireship",
+                "category": "youtube",
+                "note": "Short, dense videos that get you up to speed on a new tool in a few minutes.",
+                "id": "favorite-0"
+              },
+              {
+                "name": "Theo - t3.gg",
+                "url": "https://www.youtube.com/@t3dotgg",
+                "category": "youtube",
+                "note": "Opinionated takes on the TypeScript and React ecosystem, useful for spotting where the tooling is heading.",
+                "id": "favorite-1"
+              },
+              {
+                "name": "Josh W. Comeau",
+                "url": "https://www.joshwcomeau.com",
+                "category": "blogs",
+                "note": "The clearest explanations of CSS layout and React internals I have found, with interactive examples.",
+                "id": "favorite-2"
+              },
+              {
+                "name": "MDN Web Docs",
+                "url": "https://developer.mozilla.org",
+                "category": "learning",
+                "note": "The reference I actually trust for anything about the web platform.",
+                "id": "favorite-3"
+              },
+              {
+                "name": "Drizzle ORM",
+                "url": "https://orm.drizzle.team",
+                "category": "tools",
+                "note": "The ORM I reach for in TypeScript projects: SQL-first, typed end to end, no hidden magic.",
+                "id": "favorite-4"
+              },
+              {
+                "name": "Excalidraw",
+                "url": "https://excalidraw.com",
+                "category": "tools",
+                "note": "Fastest way to sketch an architecture before writing any code.",
+                "id": "favorite-5"
+              }
+            ]
           }
         }
-      }
+      },
+      "siteTranslation": "ready"
     }
   ]
 }

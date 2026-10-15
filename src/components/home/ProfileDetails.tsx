@@ -9,7 +9,8 @@ export function ProfileDetails({ content }: { content: CvContent }) {
     es = locale === "es";
   return (
     <>
-      {content.courses.length > 0 ? (
+      {content.site?.sections.courses !== false &&
+      content.courses.length > 0 ? (
         <Section
           title={es ? "Cursos y certificaciones" : "Courses and certifications"}
         >
@@ -33,7 +34,8 @@ export function ProfileDetails({ content }: { content: CvContent }) {
           </ul>
         </Section>
       ) : null}
-      {content.languages.length > 0 ? (
+      {content.site?.sections.languages !== false &&
+      content.languages.length > 0 ? (
         <Section title={es ? "Idiomas" : "Languages"}>
           <ul className="flex flex-col gap-2 text-sm text-foreground">
             {content.languages.map((l) => (

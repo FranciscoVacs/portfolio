@@ -12,6 +12,7 @@ import type {
   Project,
 } from "@/content/schema";
 import { skills as originalSkills } from "@/content/skills";
+import { siteSchema } from "./portfolio-settings";
 
 // gestion-cv-public-v1: public snapshot only; no access to the administration server.
 const month = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/);
@@ -42,6 +43,7 @@ const content = z.object({
   }),
   languages: z.array(z.object({ name: z.string(), level: z.string() })),
   pdf: z.object({ classic: pdfPath, europass: pdfPath.optional() }),
+  site: siteSchema.nullable().optional(),
 });
 export const catalogSchema = z.object({
   schema: z.literal("gestion-cv-public-v1"),
@@ -52,6 +54,7 @@ export const catalogSchema = z.object({
       name: z.string(),
       digest: z.string(),
       translation: z.enum(["ready", "stale", "missing"]),
+      siteTranslation: z.enum(["ready", "stale", "missing"]).optional(),
       locales: z.object({ es: content, en: content.nullable() }),
     }),
   ),
@@ -108,47 +111,116 @@ export function portfolioBundle(data: CvContent | null): PortfolioBundle {
     data.links.find(
       (l) => new URL(l.url).hostname.replace(/^www\./, "") === host,
     )?.url || "";
+  const site = data.site;
+  const recordSetting = (kind: string, id: string) =>
+    site?.records.find((r) => r.key === `${kind}:${id}`);
+  const managed = site?.projects
+    .map((p) => {
+      const [kind, id] = p.source.split(":");
+      const r = (kind === "experience" ? data.experience : data.projects).find(
+        (r) => r.id === id,
+      );
+      if (!p.visible || (p.source && !r)) return null;
+      return {
+        slug: p.id,
+        title: p.title || r?.organization || "",
+        category: p.category,
+        featured: p.featured,
+        period: {
+          start: p.start || r?.start || "",
+          ...(p.end || r?.end ? { end: p.end || r?.end || undefined } : {}),
+        },
+        summary: localized(p.summary || r?.role || ""),
+        story: localized(p.story || r?.description || ""),
+        stack: p.stack.length ? p.stack : r?.skills || [],
+        links: {
+          live: p.links.live || undefined,
+          repo: p.links.repo || undefined,
+          store: p.links.store || undefined,
+        },
+        image: p.image.src
+          ? {
+              ...p.image,
+              alt: localized(p.image.alt || p.title || r?.organization || ""),
+            }
+          : undefined,
+      };
+    })
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+  const linkedProjects = data.projects.filter(
+    (r) => !site?.projects.some((p) => p.source === `projects:${r.id}`),
+  );
   return {
     profile: {
       name: data.name,
       email: data.email,
       github: findLink("github.com"),
       linkedin: findLink("linkedin.com"),
-      avatar: originalProfile.avatar,
-      location:
-        data.experience[0]?.location || data.education[0]?.location || "",
-      headline: localized(""),
-      bio: localized(data.summary),
+      avatar: site ? site.avatar || undefined : originalProfile.avatar,
+      location: site?.location || "",
+      headline: localized(site?.headline || ""),
+      bio: localized(site?.bio || data.summary),
+      whatsapp: site?.whatsapp || undefined,
+      links: site?.links,
       cv: localized(data.pdf.classic),
     },
-    experience: data.experience.map((r) => ({
-      company: r.organization,
-      role: localized(r.role),
-      location: r.location,
-      period: period(r),
-      story: localized(r.description),
-    })),
-    education: data.education.map((r) => ({
-      institution: r.organization,
-      degree: localized(r.role),
-      location: r.location,
-      period: period(r),
-      url: educationAssets[r.id]?.url,
-      logo: educationAssets[r.id]?.logo,
-    })),
-    projects: data.projects.map((r) => ({
-      slug: r.id,
-      title: r.organization,
-      category: "personal",
-      featured: true,
-      period: period(r),
-      summary: localized(r.role),
-      story: localized(r.description),
-      stack: r.skills,
-      links: projectAssets[r.id]?.links || {},
-      image: projectAssets[r.id]?.image,
-    })),
+    experience: data.experience
+      .filter((r) => recordSetting("experience", r.id)?.visible !== false)
+      .map((r) => ({
+        company: r.organization,
+        role: localized(r.role),
+        location: r.location,
+        period: period(r),
+        story: localized(
+          recordSetting("experience", r.id)?.description || r.description,
+        ),
+      })),
+    education: data.education
+      .filter((r) => recordSetting("education", r.id)?.visible !== false)
+      .map((r) => ({
+        institution: r.organization,
+        degree: localized(r.role),
+        location: r.location,
+        period: period(r),
+        url:
+          recordSetting("education", r.id)?.url ||
+          (site ? undefined : educationAssets[r.id]?.url),
+        logo: recordSetting("education", r.id)?.logo.src
+          ? recordSetting("education", r.id)?.logo
+          : site
+            ? undefined
+            : educationAssets[r.id]?.logo,
+        story: localized(
+          recordSetting("education", r.id)?.description || r.description,
+        ),
+      })),
+    projects: [
+      ...(managed || []),
+      ...linkedProjects.map(
+        (r): Project => ({
+          slug: r.id,
+          title: r.organization,
+          category: "personal",
+          featured: !site,
+          period: period(r),
+          summary: localized(r.role),
+          story: localized(r.description),
+          stack: r.skills,
+          links: projectAssets[r.id]?.links || {},
+          image: projectAssets[r.id]?.image,
+        }),
+      ),
+    ],
     skills: [...new Set(Object.values(data.skills).flat())],
-    extra: data,
+    extra: {
+      ...data,
+      courses: data.courses
+        .filter((r) => recordSetting("courses", r.id)?.visible !== false)
+        .map((r) => ({
+          ...r,
+          description:
+            recordSetting("courses", r.id)?.description || r.description,
+        })),
+    },
   };
 }

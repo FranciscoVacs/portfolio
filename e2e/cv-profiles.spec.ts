@@ -1,6 +1,32 @@
 import { expect, test } from "@playwright/test";
 import { connected } from "./content";
 
+test("los enlaces históricos y estables descargan el PDF vigente", async ({
+  request,
+}) => {
+  if (!connected) return;
+  for (const [format, url] of [
+    ["es", connected.locales.es.pdf.classic],
+    ["en", connected.locales.en?.pdf.classic],
+    ["europass", connected.locales.en?.pdf.europass],
+  ]) {
+    if (!url) continue;
+    const current = await request.get(url),
+      stable = await request.get(`/api/cv/${format}?profile=${connected.id}`);
+    expect(stable.status()).toBe(200);
+    expect(await stable.body()).toEqual(await current.body());
+    if (format !== "europass") {
+      const legacy = await request.get(`/cv/francisco-vacs-cv-${format}.pdf`);
+      expect(legacy.url()).toContain("/cv/gestion/");
+      expect(await legacy.body()).toEqual(await current.body());
+    }
+  }
+  expect((await request.get("/api/cv/es?profile=no-existe")).status()).toBe(
+    404,
+  );
+  expect((await request.get("/api/cv/desconocido")).status()).toBe(404);
+});
+
 test("el perfil conserva su ruta al navegar, cambiar idioma y descargar", async ({
   page,
   request,

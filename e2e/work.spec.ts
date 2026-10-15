@@ -1,11 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { currentEn } from "./content";
+import { currentProjects } from "./content";
 
 test("Work lista todos los proyectos por defecto", async ({ page }) => {
   await page.goto("/en/work");
-  for (const name of currentEn
-    ? currentEn.projects.map((p) => p.organization)
-    : ["CUNUMI", "Bohemia"])
+  for (const name of currentProjects.map((p) => p.title))
     await expect(
       page.getByRole("heading", { name, exact: true }),
     ).toBeVisible();
@@ -17,7 +15,7 @@ test("el filtro de contratos muestra los contratos o su estado vacío", async ({
   await page.goto("/en/work");
   await page.getByRole("link", { name: "Contract", exact: true }).click();
   await expect(page).toHaveURL("/en/work?type=contract");
-  if (currentEn)
+  if (!currentProjects.some((p) => p.category === "contract"))
     await expect(
       page.getByText("No projects in this category yet."),
     ).toBeVisible();
@@ -37,9 +35,7 @@ test("solo quedan las dos categorías reales", async ({ page }) => {
 
 test("un filtro inválido cae en todos", async ({ page }) => {
   await page.goto("/en/work?type=freelance");
-  for (const name of currentEn
-    ? currentEn.projects.map((p) => p.organization)
-    : ["CUNUMI", "Bohemia"])
+  for (const name of currentProjects.map((p) => p.title))
     await expect(
       page.getByRole("heading", { name, exact: true }),
     ).toBeVisible();

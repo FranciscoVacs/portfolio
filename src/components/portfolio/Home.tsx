@@ -19,23 +19,38 @@ export async function PortfolioHome({ profileId }: { profileId?: string }) {
   const locale = (await getLocale()) as Locale;
   const { entry, content } = resolveCv(locale, profileId);
   if (profileId && !entry) notFound();
-  if (entry && !content) return <TranslationPending id={entry.id} />;
+  if (entry && (!content || content.site === null))
+    return <TranslationPending id={entry.id} />;
   const bundle = portfolioBundle(content);
+  const show = (key: string) => content?.site?.sections[key] !== false;
   return (
     <Container>
       <RevealContent>
         {entry ? <ProfilePicker active={entry.id} /> : null}
         <Hero profile={bundle.profile} />
-        <About profile={bundle.profile} />
-        <Skills skills={bundle.skills} />
-        <Timeline experience={bundle.experience} education={bundle.education} />
-        <FeaturedWork
-          projects={bundle.projects}
-          workHref={profileId ? `/perfil/${profileId}/work` : "/work"}
+        {show("about") ? <About profile={bundle.profile} /> : null}
+        {show("skills") ? <Skills skills={bundle.skills} /> : null}
+        <Timeline
+          experience={bundle.experience}
+          education={bundle.education}
+          showExperience={show("experience")}
+          showEducation={show("education")}
         />
-        {content ? <ProfileDetails content={content} /> : null}
-        <GithubActivity />
-        <Contact profile={bundle.profile} />
+        {show("projects") ? (
+          <FeaturedWork
+            keepOrder={!!content?.site}
+            projects={bundle.projects}
+            workHref={profileId ? `/perfil/${profileId}/work` : "/work"}
+          />
+        ) : null}
+        {bundle.extra ? <ProfileDetails content={bundle.extra} /> : null}
+        {show("github") ? (
+          <GithubActivity
+            githubUrl={bundle.profile.github}
+            username={content?.site?.githubUsername}
+          />
+        ) : null}
+        {show("contact") ? <Contact profile={bundle.profile} /> : null}
       </RevealContent>
     </Container>
   );
